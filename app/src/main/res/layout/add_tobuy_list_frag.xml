@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (C) 2015 The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <import type="com.zizohanto.android.tobuy.util.Converter" />
+
+        <variable
+            name="viewmodel"
+            type="com.zizohanto.android.tobuy.addedittobuylist.AddEditTobuyListViewModel" />
+    </data>
+
+    <com.zizohanto.android.tobuy.ScrollChildSwipeRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:enabled="@{viewmodel.dataLoading}"
+        app:refreshing="@{viewmodel.dataLoading}">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Name"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tie_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:maxLines="1"
+                    android:text="@={viewmodel.name}"
+                    tools:text="Name" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_budget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Budget ₦"
+                app:layout_constraintLeft_toRightOf="@id/til_name"
+                app:layout_constraintTop_toBottomOf="@id/til_name">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tie_budget"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal"
+                    android:padding="8dp"
+                    android:text="@={Converter.doubleToString(viewmodel.budget)}"
+                    tools:text="Budget ₦" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_due_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="8dp"
+                android:text="Due Date"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_budget" />
+
+
+            <TextView
+                android:id="@+id/tv_due_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="date"
+                android:padding="8dp"
+                android:text="@={Converter.dateToString(viewmodel.dueDate)}"
+                app:layout_constraintLeft_toRightOf="@id/tv_due_date_label"
+                app:layout_constraintTop_toTopOf="@id/tv_due_date_label"
+                tools:text="30-11-1990" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/sc_set_reminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Set reminder"
+                app:layout_constraintBottom_toBottomOf="@id/tv_due_date_label"
+                app:layout_constraintLeft_toRightOf="@id/tv_due_date"
+                app:layout_constraintTop_toTopOf="@id/tv_due_date_label" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/til_store"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Store"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_due_date_label">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@={viewmodel.store}"
+                    tools:text="Store" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tobuy_item"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_store"
+                android:padding="8dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.zizohanto.android.tobuy.ScrollChildSwipeRefreshLayout>
+
+</layout>

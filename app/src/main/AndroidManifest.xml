@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zizohanto.android.tobuy">
+    package="com.zizohanto.android.tobuyList">
 
     <application
+        android:name="com.zizohanto.android.tobuy.ToBuyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ToBuyListActivity">
+        <activity android:name="com.zizohanto.android.tobuy.addedittobuylist.AddEditTobuyListActivity"></activity>
+        <activity android:name="com.zizohanto.android.tobuy.tobuylistdetail.TobuyListDetailActivity" />
+        <activity android:name="com.zizohanto.android.tobuy.tobuylist.TobuyListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

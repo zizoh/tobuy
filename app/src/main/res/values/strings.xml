@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">ToBuy</string>
+    <string name="no_data">No data</string>
+    <string name="list_title">TobuyList List</string>
+    <string name="navigation_view_header_title">TobuyList</string>
+    <string name="refresh">Refresh</string>
+    <string name="empty_tobuylist_message">TobuyLists cannot be empty</string>
+    <string name="add_tobuylist">New Tobuy List</string>
+    <string name="edit_tobuylist">Edit Tobuy List</string>
+    <string name="menu_delete_tobuy_list">Delete list</string>
 </resources>
