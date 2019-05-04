@@ -7,10 +7,10 @@ import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
 import androidx.databinding.ObservableField;
 
-import com.zizohanto.android.tobuy.data.TobuyListDataSource;
-import com.zizohanto.android.tobuy.data.TobuyListsRepository;
-import com.zizohanto.android.tobuy.data.model.TobuyItem;
+import com.zizohanto.android.tobuy.data.model.Item;
 import com.zizohanto.android.tobuy.data.model.TobuyList;
+import com.zizohanto.android.tobuy.data.tobuylist.TobuyListDataSource;
+import com.zizohanto.android.tobuy.data.tobuylist.TobuyListsRepository;
 import com.zizohanto.android.tobuyList.R;
 
 import java.util.Date;
@@ -34,7 +34,7 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
 
     public final ObservableField<Double> totalCost = new ObservableField<>();
 
-    public final ObservableField<List<TobuyItem>> tobuyItems = new ObservableField<>();
+    public final ObservableField<List<Item>> items = new ObservableField<>();
 
     private final TobuyListsRepository mTobuyListsRepository;
 
@@ -46,7 +46,7 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
         mContext = context.getApplicationContext(); // Force use of Application Context.
         mTobuyListsRepository = tobuyListsRepository;
 
-        // Exposed observables depend on the mTaskObservable observable:
+        // Exposed observables depend on the mTobuyListObservable observable:
         mTobuyListObservable.addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable observable, int i) {
@@ -58,7 +58,7 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
                     balance.set(tobuyList.getBalance());
                     dueDate.set(tobuyList.getDueDate());
                     totalCost.set(tobuyList.getTotalCost());
-                    tobuyItems.set(tobuyList.getToBuyItems());
+                    items.set(tobuyList.getItems());
                 } else {
                     name.set(mContext.getString(R.string.no_data));
                 }
@@ -112,13 +112,13 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
 
     public void deleteTobuyList() {
         if (mTobuyListObservable.get() != null) {
-            mTobuyListsRepository.deleteTobuyList(mTobuyListObservable.get().getTobuyListId());
+            mTobuyListsRepository.deleteTobuyList(mTobuyListObservable.get().getId());
         }
     }
 
     public void onRefresh() {
         if (mTobuyListObservable.get() != null) {
-            start(mTobuyListObservable.get().getTobuyListId());
+            start(mTobuyListObservable.get().getId());
         }
     }
 
@@ -127,6 +127,6 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
     }
 
     protected String getTobuyListId() {
-        return mTobuyListObservable.get().getTobuyListId();
+        return mTobuyListObservable.get().getId();
     }
 }

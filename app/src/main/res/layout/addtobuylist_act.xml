@@ -7,7 +7,7 @@
 
         <variable
             name="viewmodel"
-            type="com.zizohanto.android.tobuy.addedittobuylist.AddEditTobuyListViewModel" />
+            type="com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListViewModel" />
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -47,11 +47,11 @@
                     android:layout_height="match_parent" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fab_edit_tobuylist_done"
+                    android:id="@+id/fab_add_tobuyitem"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/fab_margin"
-                    android:src="@drawable/ic_add"
+                    android:src="@drawable/ic_done"
                     app:fabSize="normal"
                     app:layout_anchor="@id/contentFrame"
                     app:layout_anchorGravity="bottom|right|end" />

@@ -3,7 +3,7 @@ package com.zizohanto.android.tobuy;
 import androidx.databinding.BindingAdapter;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.zizohanto.android.tobuy.tobuylist.TobuyListsViewModel;
+import com.zizohanto.android.tobuy.ui.tobuylist.TobuyListsViewModel;
 
 public class SwipeRefreshLayoutDataBinding {
 

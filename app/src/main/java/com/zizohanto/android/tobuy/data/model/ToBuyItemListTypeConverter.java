@@ -13,19 +13,19 @@ public class ToBuyItemListTypeConverter {
     private static Gson gson = new Gson();
 
     @TypeConverter
-    public static List<TobuyItem> stringToTobuyItemList(String data) {
+    public static List<Item> stringToTobuyItemList(String data) {
         if (data == null) {
             return Collections.emptyList();
         }
 
-        Type listType = new TypeToken<List<TobuyItem>>() {
+        Type listType = new TypeToken<List<Item>>() {
         }.getType();
 
         return gson.fromJson(data, listType);
     }
 
     @TypeConverter
-    public static String tobuyListListToString(List<TobuyItem> tobuyListList) {
+    public static String tobuyListListToString(List<Item> tobuyListList) {
         return gson.toJson(tobuyListList);
     }
 }

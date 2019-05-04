@@ -8,4 +8,6 @@
     <string name="add_tobuylist">New Tobuy List</string>
     <string name="edit_tobuylist">Edit Tobuy List</string>
     <string name="menu_delete_tobuy_list">Delete list</string>
+    <string name="menu_save_tobuy_list">Save list</string>
+    <string name="menu_delete_tobuy_item">Delete item</string>
 </resources>

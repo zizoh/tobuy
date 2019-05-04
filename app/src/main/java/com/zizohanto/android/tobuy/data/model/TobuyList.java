@@ -20,112 +20,113 @@ public class TobuyList {
 
     @PrimaryKey
     @NonNull
-    private String mTobuyListId;
+    private String id;
 
     @Nullable
-    private String mName;
+    private String name;
 
     @Nullable
-    private String mStore;
-    private Double mBudget;
-    private Double mBalance;
-    private Double mTotalCost;
-    public List<TobuyItem> mTobuyItems;
-    private Date mDueDate;
+    private String store;
+    private Double budget;
+    private Double balance;
+    private Double totalCost;
+    private Date dueDate;
+
+    private List<Item> items;
 
     @Ignore
     public TobuyList(String name, String store, Double budget, Double balance, Double totalCost,
-                     List<TobuyItem> tobuyItems, Date dueDate) {
-        this(UUID.randomUUID().toString(), name, store, budget, balance, totalCost, tobuyItems, dueDate);
+                     List<Item> items, Date dueDate) {
+        this(UUID.randomUUID().toString(), name, store, budget, balance, totalCost, items, dueDate);
     }
 
-    public TobuyList(String tobuyListId, String name, String store, Double budget, Double balance,
-                     Double totalCost, List<TobuyItem> tobuyItems, Date dueDate) {
-        mTobuyListId = tobuyListId;
-        mName = name;
-        mStore = store;
-        mBudget = budget;
-        mBalance = balance;
-        mTotalCost = totalCost;
-        mTobuyItems = tobuyItems;
-        mDueDate = dueDate;
+    public TobuyList(String id, String name, String store, Double budget, Double balance,
+                     Double totalCost, List<Item> items, Date dueDate) {
+        this.id = id;
+        this.name = name;
+        this.store = store;
+        this.budget = budget;
+        this.balance = balance;
+        this.totalCost = totalCost;
+        this.items = items;
+        this.dueDate = dueDate;
     }
 
-    public String getTobuyListId() {
-        return mTobuyListId;
+    public String getId() {
+        return id;
     }
 
-    public void setTobuyListId(String tobuyListId) {
-        mTobuyListId = tobuyListId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
-        return mName;
+        return name;
     }
 
     public void setName(String name) {
-        mName = name;
+        this.name = name;
     }
 
     public String getStore() {
-        return mStore;
+        return store;
     }
 
     public void setStore(String store) {
-        mStore = store;
+        this.store = store;
     }
 
     public Double getBudget() {
-        return mBudget;
+        return budget;
     }
 
     public void setBudget(Double budget) {
-        mBudget = budget;
+        this.budget = budget;
     }
 
     public Double getBalance() {
-        return mBalance;
+        return balance;
     }
 
     public void setBalance(Double balance) {
-        mBalance = balance;
+        this.balance = balance;
     }
 
     public Double getTotalCost() {
-        return mTotalCost;
+        return totalCost;
     }
 
     public void setTotalCost(Double totalCost) {
-        mTotalCost = totalCost;
+        this.totalCost = totalCost;
     }
 
-    public List<TobuyItem> getToBuyItems() {
-        return mTobuyItems;
+    public List<Item> getItems() {
+        return items;
     }
 
-    public void setToBuyItems(List<TobuyItem> tobuyItems) {
-        this.mTobuyItems = tobuyItems;
+    public void setItems(List<Item> items) {
+        this.items = items;
     }
 
     public Date getDueDate() {
-        return mDueDate;
+        return dueDate;
     }
 
     public void setDueDate(Date dueDate) {
-        mDueDate = dueDate;
+        this.dueDate = dueDate;
     }
 
     @Nullable
     public String getNameForList() {
-        if (!Strings.isNullOrEmpty(mName)) {
-            return mName;
+        if (!Strings.isNullOrEmpty(name)) {
+            return name;
         } else {
-            return mStore;
+            return store;
         }
     }
 
     public boolean isEmpty() {
-        return Strings.isNullOrEmpty(mName) /*&& mTobuyItems == null*/ /*&& mTobuyItems.size() == 0*/;
+        return Strings.isNullOrEmpty(name) /*&& items == null*/ /*&& items.size() == 0*/;
     }
 
     @Override
@@ -133,24 +134,24 @@ public class TobuyList {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TobuyList tobuyList = (TobuyList) o;
-        return Objects.equal(mTobuyListId, tobuyList.mTobuyListId) &&
-                Objects.equal(mName, tobuyList.mName) &&
-                Objects.equal(mStore, tobuyList.mStore) &&
-                Objects.equal(mBudget, tobuyList.mBudget) &&
-                Objects.equal(mBalance, tobuyList.mBalance) &&
-                Objects.equal(mTotalCost, tobuyList.mTotalCost) &&
-                Objects.equal(mTobuyItems, tobuyList.mTobuyItems) &&
-                Objects.equal(mDueDate, tobuyList.mDueDate);
+        return Objects.equal(id, tobuyList.id) &&
+                Objects.equal(name, tobuyList.name) &&
+                Objects.equal(store, tobuyList.store) &&
+                Objects.equal(budget, tobuyList.budget) &&
+                Objects.equal(balance, tobuyList.balance) &&
+                Objects.equal(totalCost, tobuyList.totalCost) &&
+                Objects.equal(items, tobuyList.items) &&
+                Objects.equal(dueDate, tobuyList.dueDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(mTobuyListId, mName, mStore, mBudget, mBalance, mTotalCost,
-                mTobuyItems, mDueDate);
+        return Objects.hashCode(id, name, store, budget, balance, totalCost,
+                items, dueDate);
     }
 
     @Override
     public String toString() {
-        return "TobuyList with name " + mName;
+        return "TobuyList with name " + name;
     }
 }

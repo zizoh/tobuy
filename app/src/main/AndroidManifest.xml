@@ -10,9 +10,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.zizohanto.android.tobuy.addedittobuylist.AddEditTobuyListActivity"></activity>
-        <activity android:name="com.zizohanto.android.tobuy.tobuylistdetail.TobuyListDetailActivity" />
-        <activity android:name="com.zizohanto.android.tobuy.tobuylist.TobuyListActivity">
+        <activity android:name="com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListActivity" />
+        <activity android:name="com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailActivity" />
+        <activity android:name="com.zizohanto.android.tobuy.ui.tobuylist.TobuyListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

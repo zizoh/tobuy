@@ -24,7 +24,7 @@
 
         <variable
             name="viewmodel"
-            type="com.zizohanto.android.tobuy.tobuylistdetail.TobuyListDetailViewModel" />
+            type="com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailViewModel" />
     </data>
 
     <com.zizohanto.android.tobuy.ScrollChildSwipeRefreshLayout
@@ -42,8 +42,8 @@
                 android:id="@+id/tv_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
                 android:maxLines="1"
+                android:padding="8dp"
                 android:text="@{viewmodel.name}"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -54,9 +54,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="8dp"
+                android:text="@{String.valueOf(viewmodel.budget)}"
                 app:layout_constraintLeft_toRightOf="@id/tv_name"
                 app:layout_constraintTop_toBottomOf="@id/tv_name"
-                android:text="@{String.valueOf(viewmodel.budget)}"
                 tools:text="Budget ₦" />
 
             <TextView

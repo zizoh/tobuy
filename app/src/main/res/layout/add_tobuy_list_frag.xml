@@ -26,7 +26,7 @@
 
         <variable
             name="viewmodel"
-            type="com.zizohanto.android.tobuy.addedittobuylist.AddEditTobuyListViewModel" />
+            type="com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListViewModel" />
     </data>
 
     <com.zizohanto.android.tobuy.ScrollChildSwipeRefreshLayout
@@ -52,8 +52,8 @@
                     android:id="@+id/tie_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:maxLines="1"
+                    android:padding="8dp"
                     android:text="@={viewmodel.name}"
                     tools:text="Name" />
 
