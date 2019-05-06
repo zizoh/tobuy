@@ -147,4 +147,5 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailN
         intent.putExtra(AddEditItemFragment.ARGUMENT_TOBUYLIST_ID, tobuyListId);
         startActivityForResult(intent, REQUEST_EDIT_ITEM);
     }
+
 }

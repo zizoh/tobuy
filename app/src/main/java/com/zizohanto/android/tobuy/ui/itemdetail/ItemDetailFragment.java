@@ -108,13 +108,12 @@ public class ItemDetailFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_delete:
                 mViewModel.deleteItem();
-                return true;
         }
         return false;
     }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.tobuyitemdetail_fragment_menu, menu);
+        inflater.inflate(R.menu.itemdetail_fragment_menu, menu);
     }
 }

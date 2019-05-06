@@ -5,4 +5,10 @@
 
     <dimen name="list_item_padding">8dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+
+    <dimen name="widget_min_width">160dp</dimen>
+    <dimen name="widget_min_height">160dp</dimen>
+    <dimen name="widget_min_resize_width">160dp</dimen>
+    <dimen name="widget_min_resize_height">160dp</dimen>
+    <dimen name="widget_margin">8dp</dimen>
 </resources>

@@ -34,6 +34,12 @@ import java.util.List;
 public class TobuyListDetailFragment extends Fragment {
 
     public static final String ARGUMENT_TOBUYLIST_ID = "TOBUYLIST_ID";
+    public static final String WIDGET_PREF = "com.zizohanto.android.tobuy.widget.pref";
+    public static final String WIDGET_PREF_TOBUYLIST_ID = "com.zizohanto.android.tobuy.widget.tobuylistid";
+    public static final String WIDGET_NAME = "com.zizohanto.android.tobuy.widget.name";
+    public static final String WIDGET_PRICE = "com.zizohanto.android.tobuy.widget.price";
+    public static final String WIDGET_BUDGET = "com.zizohanto.android.tobuy.widget.budget";
+    public static final String WIDGET_STORE = "com.zizohanto.android.tobuy.widget.store";
 
     public static final int REQUEST_EDIT_TOBUYLIST = 1;
 
@@ -115,7 +121,7 @@ public class TobuyListDetailFragment extends Fragment {
     }
 
     private void setupListAdapter() {
-        ListView listView =  mTobuyListDetailFragBinding.itemList;
+        ListView listView = mTobuyListDetailFragBinding.itemList;
 
         mItemAdapter = new ItemsAdapter(
                 new ArrayList<Item>(0),
@@ -139,6 +145,9 @@ public class TobuyListDetailFragment extends Fragment {
         switch (item.getItemId()) {
             case R.id.menu_delete:
                 mViewModel.deleteTobuyList();
+
+            case R.id.menu_show_in_widget:
+                mViewModel.showInWidget(getActivity());
                 return true;
         }
         return false;

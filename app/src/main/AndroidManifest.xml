@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.zizohanto.android.tobuyList">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name="com.zizohanto.android.tobuy.ToBuyApplication"
         android:allowBackup="true"
@@ -21,6 +23,20 @@
             </intent-filter>
         </activity>
         <activity android:name="com.zizohanto.android.tobuy.ui.addedititem.AddEditItemActivity" />
+        <service
+            android:name="com.zizohanto.android.tobuy.widget.WidgetUpdateService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <receiver android:name="com.zizohanto.android.tobuy.widget.TobuyListWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/tobuy_list_widget_info" />
+        </receiver>
     </application>
 
 </manifest>

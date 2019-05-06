@@ -1,6 +1,8 @@
 package com.zizohanto.android.tobuy;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -11,11 +13,19 @@ import com.zizohanto.android.tobuy.data.model.Item;
 import com.zizohanto.android.tobuy.data.model.TobuyList;
 import com.zizohanto.android.tobuy.data.tobuylist.TobuyListDataSource;
 import com.zizohanto.android.tobuy.data.tobuylist.TobuyListsRepository;
+import com.zizohanto.android.tobuy.widget.TobuyListWidgetProvider;
 import com.zizohanto.android.tobuyList.BR;
 import com.zizohanto.android.tobuyList.R;
 
 import java.util.Date;
 import java.util.List;
+
+import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment.WIDGET_BUDGET;
+import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment.WIDGET_NAME;
+import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment.WIDGET_PREF;
+import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment.WIDGET_PREF_TOBUYLIST_ID;
+import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment.WIDGET_PRICE;
+import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment.WIDGET_STORE;
 
 public class TobuyListViewModel extends BaseObservable implements TobuyListDataSource.GetTobuyListCallback {
 
@@ -92,16 +102,23 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
 
     @Bindable
     public boolean isEmpty() {
-        return mTobuyListObservable.get().isEmpty();
+
+        TobuyList tobuyList = mTobuyListObservable.get();
+        if (tobuyList == null) {
+            return true;
+        }
+
+        return tobuyList.isEmpty();
     }
 
     // This could be an observable, but we save a call to TobuyList.getNameForList() if not needed.
     @Bindable
     public String getNameForList() {
-        if (mTobuyListObservable.get() == null) {
+        TobuyList tobuyList = mTobuyListObservable.get();
+        if (tobuyList == null) {
             return "No data";
         }
-        return mTobuyListObservable.get().getNameForList();
+        return tobuyList.getNameForList();
     }
 
     @Override
@@ -121,6 +138,24 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
         if (mTobuyListObservable.get() != null) {
             mTobuyListsRepository.deleteTobuyList(mTobuyListObservable.get().getId());
         }
+    }
+
+    public void showInWidget(Activity activity) {
+        if (mTobuyListObservable.get() != null) {
+            saveToPreferences(activity, mTobuyListObservable.get());
+            TobuyListWidgetProvider.updateWidget(activity);
+        }
+    }
+
+    private void saveToPreferences(Activity activity, TobuyList tobuyList) {
+        SharedPreferences sharedpreferences = activity.getSharedPreferences(WIDGET_PREF, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedpreferences.edit();
+        editor.putString(WIDGET_PREF_TOBUYLIST_ID, tobuyList.getId());
+        editor.putString(WIDGET_NAME, tobuyList.getName());
+        editor.putString(WIDGET_PRICE, String.valueOf(tobuyList.getTotalCost()));
+        editor.putString(WIDGET_BUDGET, String.valueOf(tobuyList.getBudget()));
+        editor.putString(WIDGET_STORE, tobuyList.getStore());
+        editor.apply();
     }
 
     public void onRefresh() {

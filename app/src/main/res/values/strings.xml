@@ -10,6 +10,11 @@
     <string name="edit_tobuylist">Edit Tobuy List</string>
     <string name="edit_item">Edit Item</string>
     <string name="menu_delete_tobuy_list">Delete list</string>
+    <string name="menu_show_in_widget">Show in Widget</string>
     <string name="menu_save_tobuy_list">Save list</string>
     <string name="menu_delete_tobuy_item">Delete item</string>
+
+    <string name="pref_key_tobuy_list_id" translatable="false">TobuyList Id</string>
+
+    <string name="pref_tobuy_list_id_default" translatable="false">1</string>
 </resources>

@@ -20,4 +20,9 @@
         android:id="@+id/menu_delete"
         android:title="@string/menu_delete_tobuy_list"
         app:showAsAction="always|withText" />
+
+    <item
+        android:id="@+id/menu_show_in_widget"
+        android:title="@string/menu_show_in_widget"
+        app:showAsAction="never|withText" />
 </menu>

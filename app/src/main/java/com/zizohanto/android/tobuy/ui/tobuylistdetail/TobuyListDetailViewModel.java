@@ -1,5 +1,6 @@
 package com.zizohanto.android.tobuy.ui.tobuylistdetail;
 
+import android.app.Activity;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
@@ -77,5 +78,9 @@ public class TobuyListDetailViewModel extends TobuyListViewModel {
         if (mTobuyListDetailNavigator != null) {
             mTobuyListDetailNavigator.onStartEditTobuyList();
         }
+    }
+
+    public void showInWidget(Activity activity) {
+        super.showInWidget(activity);
     }
 }
