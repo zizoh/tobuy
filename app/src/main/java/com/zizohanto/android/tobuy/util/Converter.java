@@ -37,4 +37,16 @@ public class Converter {
         }
         return date;
     }
+
+    @InverseMethod("toInteger")
+    public static String integerToString(Integer value) {
+        if (value == null) {
+            return null;
+        }
+        return value.toString();
+    }
+
+    public static Integer toInteger(String value) {
+        return Integer.valueOf(value);
+    }
 }

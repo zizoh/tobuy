@@ -1,5 +1,6 @@
 package com.zizohanto.android.tobuy.ui.tobuylistdetail;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -10,15 +11,17 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.ViewModelHolder;
+import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemActivity;
 import com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListActivity;
 import com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListFragment;
+import com.zizohanto.android.tobuy.ui.itemdetail.ItemDetailActivity;
 import com.zizohanto.android.tobuy.util.ActivityUtils;
 import com.zizohanto.android.tobuyList.R;
 
 import static com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListActivity.ADD_EDIT_RESULT_OK;
 import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment.REQUEST_EDIT_TOBUYLIST;
 
-public class TobuyListDetailActivity extends AppCompatActivity implements TobuyListDetailNavigator {
+public class TobuyListDetailActivity extends AppCompatActivity implements TobuyListDetailNavigator, ItemNavigator {
 
     public static final String EXTRA_TOBUYLIST_ID = "TOBUYLIST_ID";
 
@@ -29,21 +32,12 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
     public static final int EDIT_RESULT_OK = RESULT_FIRST_USER + 3;
 
     private TobuyListDetailViewModel mTobuyListViewModel;
+    private String mTobuyListId;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.tobuylistdetail_act);
-
-        setupToolbar();
-
-        TobuyListDetailFragment tobuyListDetailFragment = findOrCreateViewFragment();
-
-        mTobuyListViewModel = findOrCreateViewModel();
-        mTobuyListViewModel.setNavigator(this);
-
-        // Link View and ViewModel
-        tobuyListDetailFragment.setViewModel(mTobuyListViewModel);
+    public static Intent getIntentForActivity(Context context, String tobuyListId) {
+        Intent intent = new Intent(context, TobuyListDetailActivity.class);
+        intent.putExtra(EXTRA_TOBUYLIST_ID, tobuyListId);
+        return intent;
     }
 
     @Override
@@ -79,21 +73,23 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
         }
     }
 
-    @NonNull
-    private TobuyListDetailFragment findOrCreateViewFragment() {
-        // Get the requested tobuyList id
-        String tobuyListId = getIntent().getStringExtra(EXTRA_TOBUYLIST_ID);
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.tobuylistdetail_act);
 
-        TobuyListDetailFragment tobuyListDetailFragment = (TobuyListDetailFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.contentFrame);
+        setupToolbar();
 
-        if (tobuyListDetailFragment == null) {
-            tobuyListDetailFragment = TobuyListDetailFragment.newInstance(tobuyListId);
+        mTobuyListId = getIntent().getStringExtra(EXTRA_TOBUYLIST_ID);
 
-            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    tobuyListDetailFragment, R.id.contentFrame);
-        }
-        return tobuyListDetailFragment;
+        TobuyListDetailFragment tobuyListDetailFragment = findOrCreateViewFragment();
+
+        mTobuyListViewModel = findOrCreateViewModel();
+        mTobuyListViewModel.setNavigator(this);
+        mTobuyListViewModel.setItemNavigator(this);
+
+        // Link View and ViewModel
+        tobuyListDetailFragment.setViewModel(mTobuyListViewModel);
     }
 
     private void setupToolbar() {
@@ -102,6 +98,23 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
+    }
+
+    @NonNull
+    private TobuyListDetailFragment findOrCreateViewFragment() {
+        // Get the requested tobuyList id
+        String tobuyListId = getIntent().getStringExtra(EXTRA_TOBUYLIST_ID);
+
+        TobuyListDetailFragment tobuyListDetailFragment = (TobuyListDetailFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.content_frame_tobuy_list_detail_frag);
+
+        if (tobuyListDetailFragment == null) {
+            tobuyListDetailFragment = TobuyListDetailFragment.newInstance(tobuyListId);
+
+            ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
+                    tobuyListDetailFragment, R.id.content_frame_tobuy_list_detail_frag);
+        }
+        return tobuyListDetailFragment;
     }
 
     @Override
@@ -131,9 +144,14 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
 
     @Override
     public void onStartEditTobuyList() {
-        String tobuyListId = getIntent().getStringExtra(EXTRA_TOBUYLIST_ID);
         Intent intent = new Intent(this, AddEditTobuyListActivity.class);
-        intent.putExtra(AddEditTobuyListFragment.ARGUMENT_EDIT_TOBUYLIST_ID, tobuyListId);
+        intent.putExtra(AddEditTobuyListFragment.ARGUMENT_EDIT_TOBUYLIST_ID, mTobuyListId);
         startActivityForResult(intent, REQUEST_EDIT_TOBUYLIST);
+    }
+
+    @Override
+    public void openItemDetails(String itemId) {
+        Intent intent = ItemDetailActivity.getIntent(this, itemId, mTobuyListId);
+        startActivityForResult(intent, AddEditItemActivity.REQUEST_CODE);
     }
 }

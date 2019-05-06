@@ -11,12 +11,15 @@ import com.zizohanto.android.tobuy.data.model.Item;
 import com.zizohanto.android.tobuy.data.model.TobuyList;
 import com.zizohanto.android.tobuy.data.tobuylist.TobuyListDataSource;
 import com.zizohanto.android.tobuy.data.tobuylist.TobuyListsRepository;
+import com.zizohanto.android.tobuyList.BR;
 import com.zizohanto.android.tobuyList.R;
 
 import java.util.Date;
 import java.util.List;
 
 public class TobuyListViewModel extends BaseObservable implements TobuyListDataSource.GetTobuyListCallback {
+
+    public final ObservableField<List<Item>> items = new ObservableField<>();
 
     public final ObservableField<String> snackbarText = new ObservableField<>();
 
@@ -33,8 +36,6 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
     public final ObservableField<Date> dueDate = new ObservableField<>();
 
     public final ObservableField<Double> totalCost = new ObservableField<>();
-
-    public final ObservableField<List<Item>> items = new ObservableField<>();
 
     private final TobuyListsRepository mTobuyListsRepository;
 
@@ -59,6 +60,7 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
                     dueDate.set(tobuyList.getDueDate());
                     totalCost.set(tobuyList.getTotalCost());
                     items.set(tobuyList.getItems());
+                    notifyPropertyChanged(BR.empty); // It's a @Bindable so update manually
                 } else {
                     name.set(mContext.getString(R.string.no_data));
                 }
@@ -88,6 +90,11 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
         return mIsDataLoading;
     }
 
+    @Bindable
+    public boolean isEmpty() {
+        return mTobuyListObservable.get().isEmpty();
+    }
+
     // This could be an observable, but we save a call to TobuyList.getNameForList() if not needed.
     @Bindable
     public String getNameForList() {
@@ -99,6 +106,7 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
 
     @Override
     public void onTobuyListLoaded(TobuyList tobuyList) {
+//        if (tobuyList != null) Timber.e("Item recieved" + tobuyList.getItems().size());
         mTobuyListObservable.set(tobuyList);
         mIsDataLoading = false;
         notifyChange();
@@ -126,7 +134,7 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
         return snackbarText.get();
     }
 
-    protected String getTobuyListId() {
+    protected String getItemId() {
         return mTobuyListObservable.get().getId();
     }
 }

@@ -1,5 +1,6 @@
 package com.zizohanto.android.tobuy.util;
 
+import com.zizohanto.android.tobuy.data.model.Item;
 import com.zizohanto.android.tobuy.data.model.TobuyList;
 import com.zizohanto.android.tobuy.data.model.TobuyListWithItems;
 
@@ -20,10 +21,15 @@ public class ModelsConverterUtils {
         return tobuyListWithItems;
     }
 
-    public static List<TobuyList> convertToListOfTobuyLists(List<TobuyListWithItems> items) {
+    public static List<TobuyList> convertToListOfTobuyLists(List<TobuyListWithItems> tobuyListWithItems) {
         List<TobuyList> tobuyLists = new ArrayList<>();
-        for (int i = 0; i < items.size(); i++) {
-            tobuyLists.add(items.get(i).getTobuyList());
+        for (int i = 0; i < tobuyListWithItems.size(); i++) {
+            List<Item> items = tobuyListWithItems.get(i).getItems();
+            if (items != null) {
+                TobuyList tobuyList = tobuyListWithItems.get(i).getTobuyList();
+                tobuyList.setItems(items);
+                tobuyLists.add(tobuyList);
+            }
         }
         return tobuyLists;
     }

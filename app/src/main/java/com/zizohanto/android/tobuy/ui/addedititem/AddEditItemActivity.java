@@ -1,6 +1,5 @@
-package com.zizohanto.android.tobuy.ui.addedittobuylist;
+package com.zizohanto.android.tobuy.ui.addedititem;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,20 +9,21 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.ViewModelHolder;
-import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemActivity;
-import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemFragment;
 import com.zizohanto.android.tobuy.util.ActivityUtils;
 import com.zizohanto.android.tobuyList.R;
 
-public class AddEditTobuyListActivity extends AppCompatActivity implements AddEditTobuyListNavigator {
+import static com.zizohanto.android.tobuy.ui.addedititem.AddEditItemFragment.ARGUMENT_EDIT_ITEM_ID;
+import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailActivity.EXTRA_TOBUYLIST_ID;
+
+public class AddEditItemActivity extends AppCompatActivity implements AddEditItemNavigator {
 
     public static final int REQUEST_CODE = 1;
 
     public static final int ADD_EDIT_RESULT_OK = RESULT_FIRST_USER + 1;
 
-    public static final String ADD_EDIT_VIEWMODEL_TAG = "ADD_EDIT_VIEWMODEL_TAG";
+    public static final String ADD_EDIT_ITEM_VIEWMODEL_TAG = "ADD_EDIT_ITEM_VIEWMODEL_TAG";
 
-    private AddEditTobuyListViewModel mViewModel;
+    private AddEditItemViewModel mViewModel;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -34,7 +34,7 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_tobuylist_act);
+        setContentView(R.layout.add_item_act);
 
         // Set up the toolbar.
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -43,7 +43,7 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowHomeEnabled(true);
 
-        AddEditTobuyListFragment addEditTaskFragment = findOrCreateViewFragment();
+        AddEditItemFragment addEditTaskFragment = findOrCreateViewFragment();
 
         mViewModel = findOrCreateViewModel();
 
@@ -54,16 +54,9 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
     }
 
     @Override
-    public void onTobuyListSaved() {
+    public void onItemSaved() {
         setResult(ADD_EDIT_RESULT_OK);
         finish();
-    }
-
-    @Override
-    public void onAddNewTobuyItem(String tobuyListId) {
-        Intent intent = new Intent(this, AddEditItemActivity.class);
-        intent.putExtra(AddEditItemFragment.ARGUMENT_TOBUYLIST_ID, tobuyListId);
-        startActivityForResult(intent, AddEditItemActivity.REQUEST_CODE);
     }
 
     @Override
@@ -73,49 +66,48 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
     }
 
     @NonNull
-    private AddEditTobuyListFragment findOrCreateViewFragment() {
+    private AddEditItemFragment findOrCreateViewFragment() {
+        String itemId = getIntent().getStringExtra(ARGUMENT_EDIT_ITEM_ID);
+        String tobuyListId = getIntent().getStringExtra(EXTRA_TOBUYLIST_ID);
+
         // View Fragment
-        AddEditTobuyListFragment addEditTobuyListFragment = (AddEditTobuyListFragment) getSupportFragmentManager()
+        AddEditItemFragment addEditItemFragment = (AddEditItemFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.contentFrame);
 
-        if (addEditTobuyListFragment == null) {
-            addEditTobuyListFragment = AddEditTobuyListFragment.newInstance();
-
-            // Send the task ID to the fragment
-            Bundle bundle = new Bundle();
-            bundle.putString(AddEditTobuyListFragment.ARGUMENT_EDIT_TOBUYLIST_ID,
-                    getIntent().getStringExtra(AddEditTobuyListFragment.ARGUMENT_EDIT_TOBUYLIST_ID));
-            addEditTobuyListFragment.setArguments(bundle);
+        if (addEditItemFragment == null) {
+            addEditItemFragment = AddEditItemFragment.newInstance(itemId, tobuyListId);
 
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
-                    addEditTobuyListFragment, R.id.contentFrame);
+                    addEditItemFragment, R.id.contentFrame);
         }
-        return addEditTobuyListFragment;
+        return addEditItemFragment;
     }
 
-    private AddEditTobuyListViewModel findOrCreateViewModel() {
+    private AddEditItemViewModel findOrCreateViewModel() {
         // In a configuration change we might have a ViewModel present. It's retained using the
         // Fragment Manager.
         @SuppressWarnings("unchecked")
-        ViewModelHolder<AddEditTobuyListViewModel> retainedViewModel =
-                (ViewModelHolder<AddEditTobuyListViewModel>) getSupportFragmentManager()
-                        .findFragmentByTag(ADD_EDIT_VIEWMODEL_TAG);
+        ViewModelHolder<AddEditItemViewModel> retainedViewModel =
+                (ViewModelHolder<AddEditItemViewModel>) getSupportFragmentManager()
+                        .findFragmentByTag(ADD_EDIT_ITEM_VIEWMODEL_TAG);
 
         if (retainedViewModel != null && retainedViewModel.getViewmodel() != null) {
             // If the model was retained, return it.
             return retainedViewModel.getViewmodel();
         } else {
             // There is no ViewModel yet, create it.
-            AddEditTobuyListViewModel viewModel = new AddEditTobuyListViewModel(
+            AddEditItemViewModel viewModel = new AddEditItemViewModel(
                     getApplicationContext(),
-                    Injection.provideTobuyListsRepository(getApplicationContext()));
+                    Injection.provideItemsRepository(getApplicationContext()));
 
             // and bind it to this Activity's lifecycle using the Fragment Manager.
             ActivityUtils.addFragmentToActivity(
                     getSupportFragmentManager(),
                     ViewModelHolder.createContainer(viewModel),
-                    ADD_EDIT_VIEWMODEL_TAG);
+                    ADD_EDIT_ITEM_VIEWMODEL_TAG);
             return viewModel;
         }
     }
+
+
 }

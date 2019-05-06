@@ -1,4 +1,4 @@
-package com.zizohanto.android.tobuy.data.tobuyitem.source.local;
+package com.zizohanto.android.tobuy.data.item.source.local;
 
 import androidx.room.Dao;
 import androidx.room.Insert;

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="view"
+            type="com.zizohanto.android.tobuy.ui.itemdetail.ItemDetailFragment" />
+
+        <variable
+            name="viewmodel"
+            type="com.zizohanto.android.tobuy.ui.itemdetail.ItemDetailViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/item_name_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Store"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@{viewmodel.name}"
+            app:layout_constraintLeft_toRightOf="@id/item_name_label"
+            app:layout_constraintTop_toTopOf="@id/item_name_label"
+            tools:text="Brush" />
+
+        <TextView
+            android:id="@+id/item_price_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Price"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_name_label" />
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@{String.valueOf(viewmodel.price)}"
+            app:layout_constraintLeft_toRightOf="@id/item_price_label"
+            app:layout_constraintTop_toTopOf="@id/item_price_label"
+            tools:text="N20" />
+
+        <TextView
+            android:id="@+id/item_store_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Store"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_price_label" />
+
+        <TextView
+            android:id="@+id/item_store"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@{viewmodel.store}"
+            app:layout_constraintLeft_toRightOf="@id/item_store_label"
+            app:layout_constraintTop_toTopOf="@id/item_store_label"
+            tools:text="Lidl" />
+
+        <TextView
+            android:id="@+id/item_placed_in_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="Placed in"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/item_store" />
+
+        <TextView
+            android:id="@+id/item_placed_in"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:text="@{String.valueOf(viewmodel.placedIn)}"
+            app:layout_constraintLeft_toRightOf="@id/item_placed_in_label"
+            app:layout_constraintTop_toTopOf="@id/item_placed_in_label"
+            tools:text="Basket" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

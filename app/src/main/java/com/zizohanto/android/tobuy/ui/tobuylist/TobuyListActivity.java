@@ -79,12 +79,12 @@ public class TobuyListActivity extends AppCompatActivity implements TobuyListIte
     @NonNull
     private TobuyListFragment findOrCreateViewFragment() {
         TobuyListFragment tobuyListsFragment =
-                (TobuyListFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+                (TobuyListFragment) getSupportFragmentManager().findFragmentById(R.id.content_frame_tobuy_list_frag);
         if (tobuyListsFragment == null) {
             // Create the fragment
             tobuyListsFragment = TobuyListFragment.newInstance();
             ActivityUtils.addFragmentToActivity(
-                    getSupportFragmentManager(), tobuyListsFragment, R.id.contentFrame);
+                    getSupportFragmentManager(), tobuyListsFragment, R.id.content_frame_tobuy_list_frag);
         }
         return tobuyListsFragment;
     }
@@ -144,8 +144,7 @@ public class TobuyListActivity extends AppCompatActivity implements TobuyListIte
 
     @Override
     public void openTobuyListDetails(String tobuyListId) {
-        Intent intent = new Intent(this, TobuyListDetailActivity.class);
-        intent.putExtra(TobuyListDetailActivity.EXTRA_TOBUYLIST_ID, tobuyListId);
+        Intent intent = TobuyListDetailActivity.getIntentForActivity(this, tobuyListId);
         startActivityForResult(intent, AddEditTobuyListActivity.REQUEST_CODE);
     }
 

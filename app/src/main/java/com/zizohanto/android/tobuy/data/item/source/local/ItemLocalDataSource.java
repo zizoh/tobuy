@@ -1,9 +1,9 @@
-package com.zizohanto.android.tobuy.data.tobuyitem.source.local;
+package com.zizohanto.android.tobuy.data.item.source.local;
 
 import androidx.annotation.NonNull;
 
+import com.zizohanto.android.tobuy.data.item.ItemDataSource;
 import com.zizohanto.android.tobuy.data.model.Item;
-import com.zizohanto.android.tobuy.data.tobuyitem.source.ItemDataSource;
 import com.zizohanto.android.tobuy.util.AppExecutors;
 
 import java.util.List;
@@ -98,7 +98,7 @@ public class ItemLocalDataSource implements ItemDataSource {
         Runnable saveRunnable = new Runnable() {
             @Override
             public void run() {
-                mItemDao.insertItem(item);
+               mItemDao.insertItem(item);
             }
         };
         mAppExecutors.diskIO().execute(saveRunnable);

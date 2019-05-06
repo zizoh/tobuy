@@ -80,8 +80,9 @@ public class TobuyListLocalDataSource implements TobuyListDataSource {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                final TobuyList tobuyList = mTobuyListDao.getTobuyListWithId(tobuyId);
+                TobuyListWithItems tobuyListWithItems = mTobuyListDao.getTobuyListWithId(tobuyId);
 
+                final TobuyList tobuyList = ModelsConverterUtils.convertToTobuyList(tobuyListWithItems);
                 mAppExecutors.mainThread().execute(new Runnable() {
                     @Override
                     public void run() {

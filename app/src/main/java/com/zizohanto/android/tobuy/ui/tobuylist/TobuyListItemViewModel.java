@@ -32,7 +32,7 @@ public class TobuyListItemViewModel extends TobuyListViewModel {
      * Called by the Data Binding library when the row is clicked.
      */
     public void tobuyListClicked() {
-        String tobuyListId = getTobuyListId();
+        String tobuyListId = getItemId();
         if (tobuyListId == null) {
             // Click happened before tobuy was loaded, no-op.
             return;

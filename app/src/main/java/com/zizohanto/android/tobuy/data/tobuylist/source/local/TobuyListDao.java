@@ -4,6 +4,7 @@ import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 import androidx.room.Update;
 
 import com.zizohanto.android.tobuy.data.model.TobuyList;
@@ -20,6 +21,7 @@ public interface TobuyListDao {
      * @return all tobuylist.
      */
     @Query("SELECT * FROM tobuylist")
+    @Transaction
     List<TobuyListWithItems> getTobuyLists();
 
     /**
@@ -29,7 +31,7 @@ public interface TobuyListDao {
      * @return the tobuy with tobuyListId.
      */
     @Query("SELECT * FROM tobuylist WHERE id = :tobuyListId")
-    TobuyList getTobuyListWithId(String tobuyListId);
+    TobuyListWithItems getTobuyListWithId(String tobuyListId);
 
     /**
      * Insert a tobuyList in the database. If the tobuyList already exists, replace it.

@@ -1,4 +1,4 @@
-package com.zizohanto.android.tobuy.data.tobuyitem.source;
+package com.zizohanto.android.tobuy.data.item;
 
 import androidx.annotation.NonNull;
 

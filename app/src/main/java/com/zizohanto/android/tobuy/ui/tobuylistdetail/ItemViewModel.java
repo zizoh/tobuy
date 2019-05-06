@@ -3,28 +3,31 @@ package com.zizohanto.android.tobuy.ui.tobuylistdetail;
 import android.content.Context;
 
 import androidx.databinding.BaseObservable;
-import androidx.databinding.Bindable;
-import androidx.databinding.ObservableArrayList;
+import androidx.databinding.Observable;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
-import androidx.databinding.ObservableList;
 
+import com.zizohanto.android.tobuy.data.item.ItemDataSource;
+import com.zizohanto.android.tobuy.data.item.ItemsRepository;
 import com.zizohanto.android.tobuy.data.model.Item;
-import com.zizohanto.android.tobuy.data.tobuyitem.source.ItemDataSource;
-import com.zizohanto.android.tobuy.data.tobuyitem.source.ItemsRepository;
+import com.zizohanto.android.tobuyList.R;
 
 import java.util.List;
 
-public class ItemsViewModel extends BaseObservable {
-
-    // These observable fields will update Views automatically
-    public final ObservableList<Item> items = new ObservableArrayList<>();
+public class ItemViewModel extends BaseObservable implements ItemDataSource.GetItemCallback {
 
     public final ObservableBoolean dataLoading = new ObservableBoolean(false);
 
     public final ObservableField<String> noItemLabel = new ObservableField<>();
 
     public final ObservableBoolean itemsAddViewVisible = new ObservableBoolean();
+
+    public final ObservableField<String> name = new ObservableField<>();
+    public final ObservableField<String> store = new ObservableField<>();
+    public final ObservableField<Double> price = new ObservableField<>();
+    public final ObservableField<Integer> placedIn = new ObservableField<>();
+    private final ObservableField<Item> mItemObservable = new ObservableField<>();
+
 
     final ObservableField<String> snackbarText = new ObservableField<>();
 
@@ -36,9 +39,25 @@ public class ItemsViewModel extends BaseObservable {
 
     private ItemsNavigator mNavigator;
 
-    public ItemsViewModel(ItemsRepository repository, Context context) {
+    public ItemViewModel(ItemsRepository repository, Context context) {
         mContext = context.getApplicationContext(); // Force use of Application Context.
         mItemsRepository = repository;
+
+        // Exposed observables depend on the mItemObservable observable:
+        mItemObservable.addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
+            @Override
+            public void onPropertyChanged(Observable observable, int i) {
+                Item item = mItemObservable.get();
+                if (item != null) {
+                    name.set(item.getName());
+                    store.set(item.getStore());
+                    price.set(item.getPrice());
+                    placedIn.set(item.getPlacedIn());
+                } else {
+                    name.set(mContext.getString(R.string.no_data));
+                }
+            }
+        });
     }
 
     void setNavigator(ItemsNavigator navigator) {
@@ -50,17 +69,13 @@ public class ItemsViewModel extends BaseObservable {
         mNavigator = null;
     }
 
-    public void start(String tobuyListId) {
-        loadItems(tobuyListId, false);
+    public void start(String itemId) {
+        loadItems(itemId, false);
     }
 
-    @Bindable
-    public boolean isEmpty() {
-        return items.isEmpty();
-    }
 
-    public void loadItems(String tobuyListId, boolean forceUpdate) {
-        loadItems(tobuyListId, forceUpdate, true);
+    public void loadItems(String itemId, boolean forceUpdate) {
+        loadItems(itemId, forceUpdate, true);
     }
 
     public String getSnackbarText() {
@@ -111,5 +126,15 @@ public class ItemsViewModel extends BaseObservable {
                 mIsDataLoadingError.set(true);
             }
         });
+    }
+
+    @Override
+    public void onItemLoaded(Item item) {
+
+    }
+
+    @Override
+    public void onDataNotAvailable() {
+
     }
 }

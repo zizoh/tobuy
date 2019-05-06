@@ -7,23 +7,18 @@ import androidx.databinding.Bindable;
 import androidx.databinding.Observable;
 import androidx.databinding.ObservableField;
 
+import com.zizohanto.android.tobuy.data.item.ItemDataSource;
+import com.zizohanto.android.tobuy.data.item.ItemsRepository;
 import com.zizohanto.android.tobuy.data.model.Item;
-import com.zizohanto.android.tobuy.data.tobuyitem.source.ItemDataSource;
-import com.zizohanto.android.tobuy.data.tobuyitem.source.ItemsRepository;
 import com.zizohanto.android.tobuyList.R;
-
-import java.util.List;
 
 public class ItemViewModel extends BaseObservable implements ItemDataSource.GetItemCallback {
 
     public final ObservableField<String> snackbarText = new ObservableField<>();
     public final ObservableField<String> name = new ObservableField<>();
     public final ObservableField<String> store = new ObservableField<>();
-    public final ObservableField<Double> budget = new ObservableField<>();
-    public final ObservableField<Double> balance = new ObservableField<>();
+    public final ObservableField<Double> price = new ObservableField<>();
     public final ObservableField<Integer> placedIn = new ObservableField<>();
-    public final ObservableField<Double> totalCost = new ObservableField<>();
-    public final ObservableField<List<Item>> tobuyItems = new ObservableField<>();
     private final ObservableField<Item> mItemObservable = new ObservableField<>();
     private final ItemsRepository mItemsRepository;
 
@@ -35,7 +30,7 @@ public class ItemViewModel extends BaseObservable implements ItemDataSource.GetI
         mContext = context.getApplicationContext(); // Force use of Application Context.
         mItemsRepository = itemsRepository;
 
-        // Exposed observables depend on the mTaskObservable observable:
+        // Exposed observables depend on the mItemObservable observable:
         mItemObservable.addOnPropertyChangedCallback(new OnPropertyChangedCallback() {
             @Override
             public void onPropertyChanged(Observable observable, int i) {
@@ -43,7 +38,7 @@ public class ItemViewModel extends BaseObservable implements ItemDataSource.GetI
                 if (item != null) {
                     name.set(item.getName());
                     store.set(item.getStore());
-                    budget.set(item.getPrice());
+                    price.set(item.getPrice());
                     placedIn.set(item.getPlacedIn());
                 } else {
                     name.set(mContext.getString(R.string.no_data));

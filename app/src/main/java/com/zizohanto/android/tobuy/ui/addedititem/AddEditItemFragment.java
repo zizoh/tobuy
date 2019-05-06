@@ -1,10 +1,7 @@
-package com.zizohanto.android.tobuy.ui.addedittobuylist;
+package com.zizohanto.android.tobuy.ui.addedititem;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,39 +15,51 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zizohanto.android.tobuy.util.SnackbarUtils;
 import com.zizohanto.android.tobuyList.R;
-import com.zizohanto.android.tobuyList.databinding.AddTobuyListFragBinding;
+import com.zizohanto.android.tobuyList.databinding.AddItemFragBinding;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class AddEditTobuyListFragment extends Fragment {
+public class AddEditItemFragment extends Fragment {
 
-    public static final String ARGUMENT_EDIT_TOBUYLIST_ID = "EDIT_TOBUYLIST_ID";
+    public static final String ARGUMENT_EDIT_ITEM_ID = "EDIT_ITEM_ID";
 
-    private AddEditTobuyListViewModel mViewModel;
+    public static final String ARGUMENT_TOBUYLIST_ID = "TOBUYLIST_ID";
 
-    private AddTobuyListFragBinding mViewDataBinding;
+    private AddEditItemViewModel mViewModel;
+
+    private AddItemFragBinding mViewDataBinding;
 
     private Observable.OnPropertyChangedCallback mSnackbarCallback;
 
-    public static AddEditTobuyListFragment newInstance() {
-        return new AddEditTobuyListFragment();
+    public AddEditItemFragment() {
+        // Required empty public constructor
     }
 
-    public AddEditTobuyListFragment() {
-        // Required empty public constructor
+    public static AddEditItemFragment newInstance(String itemId, String tobuyListId) {
+        Bundle arguments = new Bundle();
+        arguments.putString(ARGUMENT_EDIT_ITEM_ID, itemId);
+        arguments.putString(ARGUMENT_TOBUYLIST_ID, tobuyListId);
+        AddEditItemFragment fragment = new AddEditItemFragment();
+        fragment.setArguments(arguments);
+
+
+        return fragment;
     }
 
     @Override
     public void onResume() {
         super.onResume();
         if (getArguments() != null) {
-            mViewModel.start(getArguments().getString(ARGUMENT_EDIT_TOBUYLIST_ID));
-        } else {
-            mViewModel.start(null);
-        }
+            String tobuyListId = getArguments().getString(ARGUMENT_TOBUYLIST_ID);
+            String itemId = getArguments().getString(ARGUMENT_EDIT_ITEM_ID);
+            mViewModel.start(itemId, tobuyListId);
+        } /*else {
+            tobuyListId = getArguments().getString(ARGUMENT_TOBUYLIST_ID);
+            mViewModel.start(null, tobuyListId);
+        }*/
     }
 
-    public void setViewModel(@NonNull AddEditTobuyListViewModel viewModel) {
+    public void setViewModel(@NonNull AddEditItemViewModel viewModel) {
         mViewModel = checkNotNull(viewModel);
     }
 
@@ -69,9 +78,9 @@ public class AddEditTobuyListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        final View root = inflater.inflate(R.layout.add_tobuy_list_frag, container, false);
+        final View root = inflater.inflate(R.layout.add_item_frag, container, false);
         if (mViewDataBinding == null) {
-            mViewDataBinding = AddTobuyListFragBinding.bind(root);
+            mViewDataBinding = AddItemFragBinding.bind(root);
         }
 
         mViewDataBinding.setViewmodel(mViewModel);
@@ -102,12 +111,12 @@ public class AddEditTobuyListFragment extends Fragment {
 
     private void setupFab() {
         FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_tobuyitem);
-        fab.setImageResource(R.drawable.ic_add);
+                (FloatingActionButton) getActivity().findViewById(R.id.fab_save_item);
+        fab.setImageResource(R.drawable.ic_done);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mViewModel.addNewItem();
+                mViewModel.saveItem();
             }
         });
     }
@@ -117,25 +126,10 @@ public class AddEditTobuyListFragment extends Fragment {
         if (actionBar == null) {
             return;
         }
-        if (getArguments().get(ARGUMENT_EDIT_TOBUYLIST_ID) != null) {
-            actionBar.setTitle(R.string.edit_tobuylist);
+        if (getArguments().get(ARGUMENT_EDIT_ITEM_ID) != null) {
+            actionBar.setTitle(R.string.edit_item);
         } else {
-            actionBar.setTitle(R.string.add_tobuylist);
+            actionBar.setTitle(R.string.add_item);
         }
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menu_save:
-                mViewModel.saveTobuyList();
-                return true;
-        }
-        return false;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.add_tobuy_list_frag_menu, menu);
     }
 }

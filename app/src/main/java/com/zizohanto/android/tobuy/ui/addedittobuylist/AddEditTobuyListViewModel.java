@@ -45,7 +45,7 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
 
     private boolean mIsDataLoaded = false;
 
-    private AddEditTobuyListNavigator mAddEditTaskNavigator;
+    private AddEditTobuyListNavigator mAddEditTobuyListNavigator;
 
     AddEditTobuyListViewModel(Context context, TobuyListsRepository tobuyListsRepository) {
         mContext = context.getApplicationContext(); // Force use of Application Context.
@@ -53,12 +53,12 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
     }
 
     void onActivityCreated(AddEditTobuyListNavigator navigator) {
-        mAddEditTaskNavigator = navigator;
+        mAddEditTobuyListNavigator = navigator;
     }
 
     void onActivityDestroyed() {
         // Clear references to avoid potential memory leaks.
-        mAddEditTaskNavigator = null;
+        mAddEditTobuyListNavigator = null;
     }
 
     public void start(String tobuyListId) {
@@ -111,6 +111,10 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
         }
     }
 
+    public void addNewItem() {
+        navigateOnToAddNewItem();
+    }
+
     @Nullable
     public String getSnackbarText() {
         return snackbarText.get();
@@ -142,8 +146,14 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
     }
 
     private void navigateOnTobuyListSaved() {
-        if (mAddEditTaskNavigator != null) {
-            mAddEditTaskNavigator.onTobuyListSaved();
+        if (mAddEditTobuyListNavigator != null) {
+            mAddEditTobuyListNavigator.onTobuyListSaved();
+        }
+    }
+
+    private void navigateOnToAddNewItem() {
+        if (mAddEditTobuyListNavigator != null) {
+            mAddEditTobuyListNavigator.onAddNewTobuyItem(mTobuyListId);
         }
     }
 }

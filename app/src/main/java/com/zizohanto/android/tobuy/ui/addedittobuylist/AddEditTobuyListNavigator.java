@@ -6,4 +6,6 @@ package com.zizohanto.android.tobuy.ui.addedittobuylist;
 interface AddEditTobuyListNavigator {
 
     void onTobuyListSaved();
+
+    void onAddNewTobuyItem(String tobuyListId);
 }
