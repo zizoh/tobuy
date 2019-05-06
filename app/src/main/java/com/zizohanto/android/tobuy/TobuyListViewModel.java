@@ -106,7 +106,6 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
 
     @Override
     public void onTobuyListLoaded(TobuyList tobuyList) {
-//        if (tobuyList != null) Timber.e("Item recieved" + tobuyList.getItems().size());
         mTobuyListObservable.set(tobuyList);
         mIsDataLoading = false;
         notifyChange();

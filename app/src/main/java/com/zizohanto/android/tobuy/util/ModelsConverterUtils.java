@@ -27,6 +27,12 @@ public class ModelsConverterUtils {
             List<Item> items = tobuyListWithItems.get(i).getItems();
             if (items != null) {
                 TobuyList tobuyList = tobuyListWithItems.get(i).getTobuyList();
+                double totalCost = 0;
+                // TODO
+//                for (int j = 0; j < items.size(); j++) {
+//                    totalCost += items.get(i).getPrice();
+//                }
+                tobuyList.setTotalCost(totalCost);
                 tobuyList.setItems(items);
                 tobuyLists.add(tobuyList);
             }
