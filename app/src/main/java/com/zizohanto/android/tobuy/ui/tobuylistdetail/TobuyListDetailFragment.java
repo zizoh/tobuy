@@ -47,7 +47,7 @@ public class TobuyListDetailFragment extends Fragment {
 
     private TobuyListDetailViewModel mViewModel;
     private Observable.OnPropertyChangedCallback mSnackbarCallback;
-    private ItemsAdapter mItemAdapter;
+    private TobuyListDetailFragment.ItemsAdapter mItemAdapter;
 
     public static TobuyListDetailFragment newInstance(String tobuylistId) {
         Bundle arguments = new Bundle();

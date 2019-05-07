@@ -21,6 +21,7 @@ public class TobuyListDetailViewModel extends TobuyListViewModel {
     private TobuyListDetailNavigator mTobuyListDetailNavigator;
 
     String mItemId;
+
     @Nullable
     private WeakReference<ItemNavigator> mItemNavigator;
 

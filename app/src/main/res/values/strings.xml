@@ -22,4 +22,6 @@
     <string name="ad_id">ca-app-pub-1913602329854727~3669745255</string>
     <string name="banner_ad_unit_id">ca-app-pub-1913602329854727/5855982941</string>
     <string name="banner_test_ad_unit_id">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="no_tobuys_all">You have no TO-BUYS!</string>
+    <string name="no_items_all">You have no Items in your List!</string>
 </resources>

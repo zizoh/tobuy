@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter;
 
 import com.zizohanto.android.tobuy.data.model.Item;
 import com.zizohanto.android.tobuy.data.model.TobuyList;
+import com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListFragment;
 import com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment;
 
 import java.util.List;
@@ -29,6 +30,15 @@ public class TobuyListsBindings {
     @BindingAdapter("app:items")
     public static void setItems(ListView listView, List<Item> items) {
         TobuyListDetailFragment.ItemsAdapter adapter = (TobuyListDetailFragment.ItemsAdapter) listView.getAdapter();
+        if (adapter != null)
+        {
+            adapter.replaceData(items);
+        }
+    }
+
+    @BindingAdapter("app:itemsInEditFragment")
+    public static void setItemsInAddEditFragment(ListView listView, List<Item> items) {
+        AddEditTobuyListFragment.ItemsAdapter adapter = (AddEditTobuyListFragment.ItemsAdapter) listView.getAdapter();
         if (adapter != null)
         {
             adapter.replaceData(items);

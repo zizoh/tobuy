@@ -104,12 +104,12 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
     @Bindable
     public boolean isEmpty() {
 
-        TobuyList tobuyList = mTobuyListObservable.get();
-        if (tobuyList == null) {
+        List<Item> items1 = items.get();
+        if (items1 == null) {
             return true;
         }
 
-        return tobuyList.isEmpty();
+        return items1.isEmpty();
     }
 
     // This could be an observable, but we save a call to TobuyList.getNameForList() if not needed.

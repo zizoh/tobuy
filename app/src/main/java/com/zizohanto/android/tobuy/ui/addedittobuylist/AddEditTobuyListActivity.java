@@ -11,10 +11,12 @@ import androidx.appcompat.widget.Toolbar;
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.ViewModelHolder;
 import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemActivity;
+import com.zizohanto.android.tobuy.ui.itemdetail.ItemDetailActivity;
+import com.zizohanto.android.tobuy.ui.tobuylistdetail.ItemNavigator;
 import com.zizohanto.android.tobuy.util.ActivityUtils;
 import com.zizohanto.android.tobuyList.R;
 
-public class AddEditTobuyListActivity extends AppCompatActivity implements AddEditTobuyListNavigator {
+public class AddEditTobuyListActivity extends AppCompatActivity implements AddEditTobuyListNavigator, ItemNavigator {
 
     public static final int REQUEST_CODE = 1;
 
@@ -23,6 +25,7 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
     public static final String ADD_EDIT_VIEWMODEL_TAG = "ADD_EDIT_VIEWMODEL_TAG";
 
     private AddEditTobuyListViewModel mViewModel;
+    private String mTobuyListId;
 
     @Override
     public boolean onSupportNavigateUp() {
@@ -81,8 +84,9 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
 
             // Send the task ID to the fragment
             Bundle bundle = new Bundle();
+            mTobuyListId = getIntent().getStringExtra(AddEditTobuyListFragment.ARGUMENT_EDIT_TOBUYLIST_ID);
             bundle.putString(AddEditTobuyListFragment.ARGUMENT_EDIT_TOBUYLIST_ID,
-                    getIntent().getStringExtra(AddEditTobuyListFragment.ARGUMENT_EDIT_TOBUYLIST_ID));
+                    mTobuyListId);
             addEditTobuyListFragment.setArguments(bundle);
 
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
@@ -115,5 +119,11 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
                     ADD_EDIT_VIEWMODEL_TAG);
             return viewModel;
         }
+    }
+
+    @Override
+    public void openItemDetails(String itemId) {
+        Intent intent = ItemDetailActivity.getIntent(this, itemId, mTobuyListId);
+        startActivityForResult(intent, AddEditItemActivity.REQUEST_CODE);
     }
 }

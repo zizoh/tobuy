@@ -60,6 +60,15 @@
                     tools:listitem="@layout/item_tobuylist" />
             </LinearLayout>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/no_tobuys_all"
+                android:textColor="@android:color/black"
+                android:textStyle="bold"
+                android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}"/>
+
         </RelativeLayout>
     </com.zizohanto.android.tobuy.ScrollChildSwipeRefreshLayout>
 </layout>

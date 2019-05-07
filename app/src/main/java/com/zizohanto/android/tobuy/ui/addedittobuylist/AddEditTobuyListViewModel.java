@@ -3,6 +3,8 @@ package com.zizohanto.android.tobuy.ui.addedittobuylist;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 import androidx.databinding.ObservableBoolean;
 import androidx.databinding.ObservableField;
 
@@ -15,7 +17,7 @@ import com.zizohanto.android.tobuyList.R;
 import java.util.Date;
 import java.util.List;
 
-public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyListCallback {
+public class AddEditTobuyListViewModel extends BaseObservable implements TobuyListDataSource.GetTobuyListCallback {
 
     public final ObservableField<String> name = new ObservableField<>();
 
@@ -27,7 +29,7 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
 
     public final ObservableField<Double> totalCost = new ObservableField<>();
 
-    public final ObservableField<List<Item>> tobuyItems = new ObservableField<>();
+    public final ObservableField<List<Item>> items = new ObservableField<>();
 
     public final ObservableField<Date> dueDate = new ObservableField<>();
 
@@ -88,7 +90,7 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
         budget.set(tobuyList.getBudget());
         balance.set(tobuyList.getBalance());
         totalCost.set(tobuyList.getTotalCost());
-        tobuyItems.set(tobuyList.getItems());
+        items.set(tobuyList.getItems());
         dueDate.set(tobuyList.getDueDate());
 
         dataLoading.set(false);
@@ -104,10 +106,10 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
     public void saveTobuyList() {
         if (isNewTobuyList()) {
             createTobuyList(name.get(), store.get(), budget.get(), balance.get(),
-                    totalCost.get(), tobuyItems.get(), dueDate.get());
+                    totalCost.get(), items.get(), dueDate.get());
         } else {
             updateTobuyList(name.get(), store.get(), budget.get(), balance.get(),
-                    totalCost.get(), tobuyItems.get(), dueDate.get());
+                    totalCost.get(), items.get(), dueDate.get());
         }
     }
 
@@ -126,6 +128,17 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
 
     private boolean isNewTobuyList() {
         return mIsNewTobuyList;
+    }
+
+    @Bindable
+    public boolean isEmpty() {
+
+        List<Item> items1 = items.get();
+        if (items1 == null) {
+            return true;
+        }
+
+        return items1.isEmpty();
     }
 
     private void createTobuyList(String name, String store, Double budget, Double balance,
