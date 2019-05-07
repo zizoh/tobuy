@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "307292103008",
+    "firebase_url": "https://tobuy-19.firebaseio.com",
+    "project_id": "tobuy-19",
+    "storage_bucket": "tobuy-19.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:307292103008:android:7de09e2f63ad826d",
+        "android_client_info": {
+          "package_name": "com.zizohanto.android.tobuyList"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "307292103008-tpc5q8nt03bqgmog7o33ikf1i50se6b6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zizohanto.android.tobuyList",
+            "certificate_hash": "e1cebdebb665c4031dbfad2995bff21852b4def8"
+          }
+        },
+        {
+          "client_id": "307292103008-qnd0l7gleu9dfg9no96pnfb05p3jshv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTk36tPMyJoVFrpW4K2z6SYRR2A3SiTHA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "307292103008-qnd0l7gleu9dfg9no96pnfb05p3jshv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

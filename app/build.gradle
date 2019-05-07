@@ -1,9 +1,11 @@
 apply plugin: 'com.android.application'
+apply plugin: "io.fabric"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.zizohanto.android.tobuy"
+        applicationId "com.zizohanto.android.tobuyList"
         minSdkVersion 15
         targetSdkVersion 28
         versionCode 1
@@ -36,6 +38,8 @@ ext {
     guavaVersion = '27.1-android'
     gsonVersion = "2.8.5"
     adsVersion = "17.2.0"
+    crashlyticsVersion = "2.9.9"
+    firebaseVersion = "16.0.8"
 }
 
 dependencies {
@@ -55,6 +59,9 @@ dependencies {
     implementation "com.facebook.stetho:stetho:$stethoVersion"
     implementation "com.google.guava:guava:$guavaVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
+    implementation "com.google.android.gms:play-services-ads:$adsVersion"
+    implementation "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion"
+    implementation "com.google.firebase:firebase-core:$firebaseVersion"
 
     // local unit tests dependencies
     testImplementation "junit:junit:$jUnitVersion"
@@ -64,5 +71,4 @@ dependencies {
 
     // espresso ui tests dependencies
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
-    implementation "com.google.android.gms:play-services-ads:$adsVersion"
 }

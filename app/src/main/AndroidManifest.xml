@@ -24,6 +24,7 @@
             </intent-filter>
         </activity>
         <activity android:name="com.zizohanto.android.tobuy.ui.addedititem.AddEditItemActivity" />
+
         <service
             android:name="com.zizohanto.android.tobuy.widget.WidgetUpdateService"
             android:enabled="true"
@@ -41,7 +42,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/ad_id"/>
+            android:value="@string/ad_id" />
 
     </application>
 
