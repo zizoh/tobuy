@@ -16,6 +16,7 @@ public class Converter {
     }
 
     public static Double toDouble(String value) {
+        if (value.equals("")) return 0.0;
         return Double.valueOf(value);
     }
 
@@ -47,6 +48,7 @@ public class Converter {
     }
 
     public static Integer toInteger(String value) {
+        if (value.equals("")) return 0;
         return Integer.valueOf(value);
     }
 }

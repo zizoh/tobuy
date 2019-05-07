@@ -56,9 +56,10 @@
                     android:id="@+id/tobuylist_list"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/item_tobuylist"
-                    app:tobuylists="@{viewmodel.items}" />
+                    app:tobuylists="@{viewmodel.items}"
+                    tools:listitem="@layout/item_tobuylist" />
             </LinearLayout>
+
         </RelativeLayout>
     </com.zizohanto.android.tobuy.ScrollChildSwipeRefreshLayout>
 </layout>

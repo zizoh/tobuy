@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zizohanto.android.tobuy.util.SnackbarUtils;
 import com.zizohanto.android.tobuyList.R;
@@ -38,16 +40,6 @@ public class AddEditTobuyListFragment extends Fragment {
 
     public AddEditTobuyListFragment() {
         // Required empty public constructor
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        if (getArguments() != null) {
-            mViewModel.start(getArguments().getString(ARGUMENT_EDIT_TOBUYLIST_ID));
-        } else {
-            mViewModel.start(null);
-        }
     }
 
     public void setViewModel(@NonNull AddEditTobuyListViewModel viewModel) {
@@ -74,6 +66,23 @@ public class AddEditTobuyListFragment extends Fragment {
             mViewDataBinding = AddTobuyListFragBinding.bind(root);
         }
 
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mViewDataBinding.adView.loadAd(adRequest);
+        mViewDataBinding.adView.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+            }
+
+            @Override
+            public void onAdClosed() {
+            }
+
+            @Override
+            public void onAdFailedToLoad(int errorCode) {
+                super.onAdFailedToLoad(errorCode);
+            }
+        });
+
         mViewDataBinding.setViewmodel(mViewModel);
 
         setHasOptionsMenu(true);
@@ -83,11 +92,37 @@ public class AddEditTobuyListFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (getArguments() != null) {
+            mViewModel.start(getArguments().getString(ARGUMENT_EDIT_TOBUYLIST_ID));
+        } else {
+            mViewModel.start(null);
+        }
+
+        if (mViewDataBinding.adView != null) {
+            mViewDataBinding.adView.resume();
+        }
+    }
+
+    @Override
     public void onDestroy() {
         if (mSnackbarCallback != null) {
             mViewModel.snackbarText.removeOnPropertyChangedCallback(mSnackbarCallback);
         }
+
+        if (mViewDataBinding.adView != null) {
+            mViewDataBinding.adView.destroy();
+        }
         super.onDestroy();
+    }
+
+    @Override
+    public void onPause() {
+        if (mViewDataBinding.adView != null) {
+            mViewDataBinding.adView.pause();
+        }
+        super.onPause();
     }
 
     private void setupSnackbar() {

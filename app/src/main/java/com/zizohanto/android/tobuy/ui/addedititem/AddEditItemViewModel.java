@@ -42,6 +42,8 @@ public class AddEditItemViewModel implements ItemDataSource.GetItemCallback {
     AddEditItemViewModel(Context context, ItemsRepository tobuyListsRepository) {
         mContext = context.getApplicationContext(); // Force use of Application Context.
         mItemsRepository = tobuyListsRepository;
+        price.set(0.0);
+        placedIn.set(0);
     }
 
     void onActivityCreated(AddEditItemNavigator navigator) {
@@ -111,7 +113,7 @@ public class AddEditItemViewModel implements ItemDataSource.GetItemCallback {
     private void createItem(String name, String store, double price, int placedIn) {
         Item newItem = new Item(mTobuyListId, name, price, store, placedIn);
         if (newItem.isEmpty()) {
-            snackbarText.set(mContext.getString(R.string.empty_tobuylist_message));
+            snackbarText.set(mContext.getString(R.string.empty_item_message));
         } else {
             mItemsRepository.saveItem(newItem);
             navigateOnItemSaved();

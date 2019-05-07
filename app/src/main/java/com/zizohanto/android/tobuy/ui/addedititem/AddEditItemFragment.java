@@ -1,5 +1,6 @@
 package com.zizohanto.android.tobuy.ui.addedititem;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zizohanto.android.tobuy.util.SnackbarUtils;
 import com.zizohanto.android.tobuyList.R;
@@ -30,6 +32,8 @@ public class AddEditItemFragment extends Fragment {
     private AddItemFragBinding mViewDataBinding;
 
     private Observable.OnPropertyChangedCallback mSnackbarCallback;
+    private Context mContext;
+    private InterstitialAd mInterstitialAd;
 
     public AddEditItemFragment() {
         // Required empty public constructor
@@ -87,6 +91,7 @@ public class AddEditItemFragment extends Fragment {
 
         setHasOptionsMenu(true);
         setRetainInstance(false);
+
 
         return mViewDataBinding.getRoot();
     }

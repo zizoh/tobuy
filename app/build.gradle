@@ -8,6 +8,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        multiDexEnabled true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -34,6 +35,7 @@ ext {
     roomVersion = '2.0.0'
     guavaVersion = '27.1-android'
     gsonVersion = "2.8.5"
+    adsVersion = "17.2.0"
 }
 
 dependencies {
@@ -62,4 +64,5 @@ dependencies {
 
     // espresso ui tests dependencies
     androidTestImplementation "androidx.test.espresso:espresso-core:$espressoVersion"
+    implementation "com.google.android.gms:play-services-ads:$adsVersion"
 }

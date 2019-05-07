@@ -112,6 +112,10 @@ public class AddEditTobuyListViewModel implements TobuyListDataSource.GetTobuyLi
     }
 
     public void addNewItem() {
+        if (mTobuyListId == null) {
+            snackbarText.set(mContext.getString(R.string.tobuy_list_not_saved_message));
+            return;
+        }
         navigateOnToAddNewItem();
     }
 

@@ -11,7 +11,6 @@ import androidx.appcompat.widget.Toolbar;
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.ViewModelHolder;
 import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemActivity;
-import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemFragment;
 import com.zizohanto.android.tobuy.util.ActivityUtils;
 import com.zizohanto.android.tobuyList.R;
 
@@ -61,8 +60,7 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
 
     @Override
     public void onAddNewTobuyItem(String tobuyListId) {
-        Intent intent = new Intent(this, AddEditItemActivity.class);
-        intent.putExtra(AddEditItemFragment.ARGUMENT_TOBUYLIST_ID, tobuyListId);
+        Intent intent = AddEditItemActivity.getActivityIntent(this, tobuyListId);
         startActivityForResult(intent, AddEditItemActivity.REQUEST_CODE);
     }
 

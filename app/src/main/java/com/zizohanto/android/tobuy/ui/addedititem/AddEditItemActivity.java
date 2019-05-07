@@ -1,5 +1,7 @@
 package com.zizohanto.android.tobuy.ui.addedititem;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -109,5 +111,10 @@ public class AddEditItemActivity extends AppCompatActivity implements AddEditIte
         }
     }
 
+    public static Intent getActivityIntent(Context context, String tobuyListId) {
+        Intent intent = new Intent(context, AddEditItemActivity.class);
+        intent.putExtra(AddEditItemFragment.ARGUMENT_TOBUYLIST_ID, tobuyListId);
+        return intent;
+    }
 
 }

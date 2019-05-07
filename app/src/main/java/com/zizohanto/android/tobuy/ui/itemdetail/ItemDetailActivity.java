@@ -9,6 +9,8 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.ViewModelHolder;
 import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemActivity;
@@ -31,6 +33,9 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailN
     public static final int EDIT_RESULT_OK = RESULT_FIRST_USER + 3;
 
     private ItemDetailViewModel mItemViewModel;
+
+    private InterstitialAd mInterstitialAd;
+    private AdRequest mAdRequest;
 
     public static Intent getIntent(Context context, String itemId, String tobuyListId) {
         Intent intent = new Intent(context, ItemDetailActivity.class);
@@ -118,9 +123,9 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailN
         if (requestCode == REQUEST_EDIT_ITEM) {
             // If the tobuyItem was edited successfully, go back to the item.
             if (resultCode == ADD_EDIT_RESULT_OK) {
+
                 // If the result comes from the add/edit screen, it's an edit.
-                setResult(EDIT_RESULT_OK);
-                finish();
+
             }
         }
     }

@@ -3,6 +3,7 @@ package com.zizohanto.android.tobuy;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
@@ -156,6 +157,11 @@ public class TobuyListViewModel extends BaseObservable implements TobuyListDataS
         editor.putString(WIDGET_BUDGET, String.valueOf(tobuyList.getBudget()));
         editor.putString(WIDGET_STORE, tobuyList.getStore());
         editor.apply();
+    }
+
+    private String getStoreName(String store) {
+        if (TextUtils.isEmpty(store)) return "";
+        return store;
     }
 
     public void onRefresh() {
