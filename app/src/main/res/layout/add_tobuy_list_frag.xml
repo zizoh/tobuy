@@ -39,13 +39,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_name"
+                style="@style/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"
+                android:hint="@string/hint_name"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -54,75 +56,103 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:padding="8dp"
                     android:text="@={viewmodel.name}"
-                    tools:text="Name" />
+                    tools:text="@string/tobuy_list_name" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_budget"
+                style="@style/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Budget ₦"
+                android:hint="@string/hint_budget"
                 app:layout_constraintLeft_toRightOf="@id/til_name"
                 app:layout_constraintTop_toBottomOf="@id/til_name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tie_budget"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
-                    android:padding="8dp"
                     android:text="@={Converter.doubleToString(viewmodel.budget)}"
-                    tools:text="Budget ₦" />
+                    tools:text="@string/budget_text" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/tv_total_cost_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorBg"
+                android:padding="16dp"
+                android:textColor="@android:color/black"
+                android:visibility="gone"
+                ads:layout_constraintRight_toLeftOf="@id/tv_total_cost"
+                app:layout_constraintTop_toBottomOf="@id/til_budget"
+                tools:text="@string/total_cost_label"/>
+
+            <TextView
+                android:id="@+id/tv_total_cost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@color/colorBg"
+                android:paddingTop="16dp"
+                android:paddingRight="16dp"
+                android:paddingBottom="16dp"
+                android:visibility="gone"
+                ads:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/til_budget"
+                tools:text="@string/total_cost_text"/>
 
             <TextView
                 android:id="@+id/tv_due_date_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Due Date"
+                android:padding="16dp"
+                android:text="@string/due_date_label"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_budget" />
+                app:layout_constraintTop_toBottomOf="@id/tv_total_cost" />
 
 
             <TextView
                 android:id="@+id/tv_due_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="date"
-                android:padding="8dp"
+                android:padding="16dp"
                 android:text="@={Converter.dateToString(viewmodel.dueDate)}"
+                android:visibility="gone"
                 app:layout_constraintLeft_toRightOf="@id/tv_due_date_label"
                 app:layout_constraintTop_toTopOf="@id/tv_due_date_label"
-                tools:text="30-11-1990" />
+                tools:text="@string/due_date" />
 
             <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/sc_set_reminder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Set reminder"
+                android:text="@string/set_reminder"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tv_due_date_label"
                 app:layout_constraintLeft_toRightOf="@id/tv_due_date"
                 app:layout_constraintTop_toTopOf="@id/tv_due_date_label" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_store"
+                style="@style/text_input"
+                android:hint="@string/store_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Store"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_due_date_label">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:text="@={viewmodel.store}"
-                    tools:text="Store" />
+                    tools:text="@string/store" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -142,6 +172,7 @@
                 android:id="@+id/item_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}"
                 app:itemsInEditFragment="@{viewmodel.items}"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -154,6 +185,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 ads:adSize="BANNER"
+                android:layout_marginTop="8dp"
                 ads:adUnitId="@string/banner_test_ad_unit_id"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

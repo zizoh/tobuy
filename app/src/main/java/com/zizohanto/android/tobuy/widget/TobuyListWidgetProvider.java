@@ -11,11 +11,11 @@ import android.content.SharedPreferences;
 import android.os.SystemClock;
 import android.widget.RemoteViews;
 
-import com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailActivity;
 import com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailFragment;
 import com.zizohanto.android.tobuyList.R;
 
 import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailActivity.EXTRA_TOBUYLIST_ID;
+import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailActivity.getIntentForActivity;
 
 /**
  * Implementation of App Widget functionality.
@@ -45,7 +45,7 @@ public class TobuyListWidgetProvider extends AppWidgetProvider {
         views.setTextViewText(R.id.budget, budget);
         views.setTextViewText(R.id.store, store);
 
-        Intent clickIntent = new Intent(context, TobuyListDetailActivity.class);
+        Intent clickIntent = getIntentForActivity(context, tobuyListId);
         clickIntent.putExtra(EXTRA_TOBUYLIST_ID, tobuyListId);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, clickIntent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_root, pendingIntent);

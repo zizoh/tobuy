@@ -1,10 +1,13 @@
 package com.zizohanto.android.tobuy.ui.addedititem;
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,10 +17,11 @@ import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.ads.InterstitialAd;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zizohanto.android.tobuy.util.SnackbarUtils;
 import com.zizohanto.android.tobuyList.R;
 import com.zizohanto.android.tobuyList.databinding.AddItemFragBinding;
+
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -114,11 +118,10 @@ public class AddEditItemFragment extends Fragment {
         mViewModel.snackbarText.addOnPropertyChangedCallback(mSnackbarCallback);
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     private void setupFab() {
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_save_item);
-        fab.setImageResource(R.drawable.ic_done);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button button = Objects.requireNonNull(getActivity()).findViewById(R.id.fab_save_item);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewModel.saveItem();

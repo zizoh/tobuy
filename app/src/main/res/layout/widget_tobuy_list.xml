@@ -4,6 +4,8 @@
     android:id="@+id/appwidget_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
+    android:backgroundTint="@color/colorBg"
     android:padding="@dimen/widget_margin">
 
     <TextView
@@ -11,10 +13,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_vertical"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        tools:text="Weekend Shopping" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Title"
+        android:textSize="28sp"
+        tools:text="@string/tobuy_list_name" />
 
     <TextView
         android:id="@+id/price_label"
@@ -22,18 +26,22 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
         android:layout_alignParentLeft="true"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorBlueLight"
         android:padding="8dp"
-        android:text="Price"
+        android:text="@string/price"
         android:textStyle="bold" />
 
     <TextView
         android:id="@+id/price"
+        android:layout_marginTop="8dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
-        android:layout_toRightOf="@id/price_label"
+        android:layout_marginRight="24dp"
+        android:background="@color/colorBlueLight"
         android:padding="8dp"
-        tools:text="1500" />
+        tools:text="@string/tobuy_list_price_text" />
 
     <TextView
         android:id="@+id/budget_label"
@@ -41,16 +49,19 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
         android:layout_toLeftOf="@id/budget"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorYellowLight"
         android:padding="8dp"
-        android:text="Budget" />
+        android:text="@string/budget_label" />
 
     <TextView
         android:id="@+id/budget"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
+        android:layout_marginTop="8dp"
+        android:background="@color/colorYellowLight"
         android:layout_alignParentRight="true"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:padding="8dp"
         tools:text="2000" />
 
@@ -62,6 +73,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:padding="8dp"
+        android:visibility="gone"
         tools:text="Lidl" />
 
 </RelativeLayout>

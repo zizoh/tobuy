@@ -31,13 +31,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/fab_edit_item"
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/fab_margin"
-            android:src="@drawable/ic_edit"
-            app:fabSize="normal"
+            android:text="@string/edit"
+            app:cornerRadius="8dp"
+            app:icon="@drawable/ic_edit"
             app:layout_anchor="@id/content_frame_item_detail_frag"
             app:layout_anchorGravity="bottom|right|end" />
 

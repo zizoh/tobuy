@@ -1,5 +1,7 @@
 package com.zizohanto.android.tobuy.ui.addedittobuylist;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.NonNull;
@@ -20,7 +23,6 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.data.model.Item;
 import com.zizohanto.android.tobuy.data.tobuylist.TobuyListsRepository;
@@ -33,6 +35,7 @@ import com.zizohanto.android.tobuyList.databinding.ItemTobuyBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -150,11 +153,10 @@ public class AddEditTobuyListFragment extends Fragment {
         mViewModel.snackbarText.addOnPropertyChangedCallback(mSnackbarCallback);
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     private void setupFab() {
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_add_tobuyitem);
-        fab.setImageResource(R.drawable.ic_add);
-        fab.setOnClickListener(new View.OnClickListener() {
+        Button button = Objects.requireNonNull(getActivity()).findViewById(R.id.fab_add_tobuyitem);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewModel.addNewItem();

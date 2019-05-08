@@ -1,6 +1,7 @@
 package com.zizohanto.android.tobuy.ui.addedititem;
 
 import android.content.Context;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.ObservableBoolean;
@@ -95,7 +96,9 @@ public class AddEditItemViewModel implements ItemDataSource.GetItemCallback {
     // Called when clicking on fab.
     public void saveItem() {
         if (isNewItem()) {
-            createItem(name.get(), store.get(), price.get(), placedIn.get());
+            String store = this.store.get();
+            if (TextUtils.isEmpty(store)) store = "NA";
+            createItem(name.get(), store, price.get(), placedIn.get());
         } else {
             updateItem(name.get(), store.get(), price.get(), placedIn.get());
         }

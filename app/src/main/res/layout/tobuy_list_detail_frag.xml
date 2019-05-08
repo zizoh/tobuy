@@ -38,141 +38,165 @@
         app:enabled="@{viewmodel.dataLoading}"
         app:refreshing="@{viewmodel.dataLoading}">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="16dp">
 
-            <TextView
-                android:id="@+id/tv_name"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:maxLines="1"
-                android:padding="8dp"
-                android:text="@{viewmodel.name}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Name" />
+                android:layout_alignParentTop="true"
+                android:backgroundTint="@color/colorBg"
+                app:cardCornerRadius="8dp"
+                tools:targetApi="lollipop">
 
-            <TextView
-                android:id="@+id/price_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Total cost"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="12dp">
 
-            <TextView
-                android:id="@+id/tv_total_cost"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="@{String.valueOf(viewmodel.totalCost)}"
-                app:layout_constraintLeft_toRightOf="@id/price_label"
-                app:layout_constraintTop_toTopOf="@id/price_label"
-                tools:text="150" />
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="@{viewmodel.name}"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="24sp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/tobuy_list_name" />
+
+                    <TextView
+                        android:id="@+id/price_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/total_cost_label"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_name" />
+
+                    <TextView
+                        android:id="@+id/tv_total_cost"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:text="@{String.valueOf(viewmodel.totalCost)}"
+                        android:textColor="@color/colorAccent"
+                        app:layout_constraintLeft_toRightOf="@id/price_label"
+                        app:layout_constraintTop_toTopOf="@id/price_label"
+                        tools:text="@string/total_cost_text" />
+
+                    <TextView
+                        android:id="@+id/budget_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/budget_label"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/price_label" />
+
+                    <TextView
+                        android:id="@+id/tv_budget"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:text="@{String.valueOf(viewmodel.budget)}"
+                        android:textColor="@color/colorAccent"
+                        app:layout_constraintLeft_toRightOf="@id/budget_label"
+                        app:layout_constraintTop_toTopOf="@id/budget_label"
+                        tools:text="@string/budget_text" />
+
+                    <TextView
+                        android:id="@+id/tv_due_date_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:padding="8dp"
+                        android:text="Due Date"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_budget" />
 
 
+                    <TextView
+                        android:id="@+id/tv_due_date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:padding="8dp"
+                        android:text="@{String.valueOf(viewmodel.dueDate)}"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toRightOf="@id/tv_due_date_label"
+                        app:layout_constraintTop_toTopOf="@id/tv_due_date_label"
+                        tools:text="30-11-1990" />
 
-            <TextView
-                android:id="@+id/budget_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Budget"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/price_label" />
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/sc_set_reminder"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Set reminder"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="@id/tv_due_date_label"
+                        app:layout_constraintLeft_toRightOf="@id/tv_due_date"
+                        app:layout_constraintTop_toTopOf="@id/tv_due_date_label" />
 
-            <TextView
-                android:id="@+id/tv_budget"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="@{String.valueOf(viewmodel.budget)}"
-                app:layout_constraintLeft_toRightOf="@id/budget_label"
-                app:layout_constraintTop_toTopOf="@id/budget_label"
-                tools:text="200" />
+                    <TextView
+                        android:id="@+id/tv_store"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:gravity="center_horizontal"
+                        android:text="@{viewmodel.store}"
+                        android:textColor="@color/colorAccent"
+                        android:visibility="gone"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tv_due_date"
+                        tools:text="@string/store" />
 
-            <TextView
-                android:id="@+id/tv_due_date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="Due Date"
-                android:visibility="gone"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_budget" />
+                    <!--<androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_tobuy_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/tv_store"
+                        android:padding="8dp">
 
+                    </androidx.recyclerview.widget.RecyclerView>-->
 
-            <TextView
-                android:id="@+id/tv_due_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:padding="8dp"
-                android:text="@{String.valueOf(viewmodel.dueDate)}"
-                android:visibility="gone"
-                app:layout_constraintLeft_toRightOf="@id/tv_due_date_label"
-                app:layout_constraintTop_toTopOf="@id/tv_due_date_label"
-                tools:text="30-11-1990" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/sc_set_reminder"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Set reminder"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/tv_due_date_label"
-                app:layout_constraintLeft_toRightOf="@id/tv_due_date"
-                app:layout_constraintTop_toTopOf="@id/tv_due_date_label" />
-
-            <TextView
-                android:id="@+id/tv_store"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:text="@{viewmodel.store}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_due_date_label"
-                tools:text="Store" />
-
-            <!--<androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_tobuy_item"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_store"
-                android:padding="8dp">
-
-            </androidx.recyclerview.widget.RecyclerView>-->
+            </com.google.android.material.card.MaterialCardView>
 
             <ListView
                 android:id="@+id/item_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:items="@{viewmodel.items}"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_store"
+                android:layout_below="@id/card_view"
                 android:visibility="@{viewmodel.empty ? View.GONE : View.VISIBLE}"
                 tools:listitem="@layout/item_tobuy" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:gravity="center"
                 android:text="@string/no_items_all"
                 android:textColor="@android:color/black"
                 android:textStyle="bold"
                 android:visibility="@{viewmodel.empty ? View.VISIBLE : View.GONE}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_store"/>
+                android:layout_below="@id/card_view"/>
 
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        </RelativeLayout>
 
     </com.zizohanto.android.tobuy.ScrollChildSwipeRefreshLayout>
 

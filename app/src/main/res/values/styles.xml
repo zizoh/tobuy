@@ -10,4 +10,11 @@
 
     <style name="Toolbar" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="text_input" parent="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+        <item name="boxCornerRadiusTopEnd">16dp</item>
+        <item name="boxCornerRadiusTopStart">16dp</item>
+        <item name="boxBackgroundColor">@color/colorBg</item>
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
 </resources>

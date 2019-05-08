@@ -1,5 +1,7 @@
 package com.zizohanto.android.tobuy.ui.tobuylistdetail;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -15,7 +18,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.TobuyListViewModel;
 import com.zizohanto.android.tobuy.data.model.Item;
@@ -27,6 +29,7 @@ import com.zizohanto.android.tobuyList.databinding.TobuyListDetailFragBinding;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Main UI for the tobuylist detail screen.
@@ -86,11 +89,11 @@ public class TobuyListDetailFragment extends Fragment {
         mViewModel.snackbarText.addOnPropertyChangedCallback(mSnackbarCallback);
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     private void setupFab() {
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_tobuy_list);
+        Button button = Objects.requireNonNull(getActivity()).findViewById(R.id.fab_edit_tobuy_list);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewModel.startEditTobuyList();
@@ -115,9 +118,7 @@ public class TobuyListDetailFragment extends Fragment {
 
         setHasOptionsMenu(true);
 
-        View root = mTobuyListDetailFragBinding.getRoot();
-
-        return root;
+        return mTobuyListDetailFragBinding.getRoot();
     }
 
     private void setupListAdapter() {

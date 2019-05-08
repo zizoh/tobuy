@@ -8,56 +8,77 @@
         <variable
             name="viewmodel"
             type="com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailViewModel" />
+
         <variable
             name="item"
             type="com.zizohanto.android.tobuy.data.model.Item" />
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
-        android:onClick="@{() -> viewmodel.itemClicked()}">
+        android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@{item.name}"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Honey" />
+            android:layout_margin="16dp"
+            app:elevation="4dp"
+            app:strokeColor="@color/colorPinkLight"
+            app:strokeWidth="2dp"
+            tools:targetApi="lollipop">
 
-        <TextView
-            android:id="@+id/tv_price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@{String.valueOf(item.price)}"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/tv_name"
-            tools:text="N200" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:onClick="@{() -> viewmodel.itemClicked()}"
+                android:padding="2dp">
 
-        <TextView
-            android:id="@+id/tv_store"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@{item.store}"
-            app:layout_constraintLeft_toLeftOf="@id/tv_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_name" />
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.name}"
+                    android:textColor="@color/colorAccent"
+                    android:textSize="24sp"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="Honey" />
 
-        <TextView
-            android:id="@+id/tv_placed_in"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@{String.valueOf(item.placedIn)}"
-            app:layout_constraintLeft_toLeftOf="@id/tv_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_store"
-            tools:text="Basket" />
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="8dp"
+                    android:text="@{String.valueOf(item.price)}"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/tv_name"
+                    tools:text="@string/price_text" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/tv_store"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{item.store}"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_price"
+                    tools:text="store" />
+
+                <TextView
+                    android:id="@+id/tv_placed_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{String.valueOf(item.placedIn)}"
+                    android:visibility="gone"
+                    app:layout_constraintLeft_toLeftOf="@id/tv_name"
+                    app:layout_constraintTop_toBottomOf="@id/tv_store"
+                    tools:text="@string/placed_in" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+
 </layout>

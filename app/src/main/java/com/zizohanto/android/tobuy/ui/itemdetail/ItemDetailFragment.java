@@ -1,5 +1,7 @@
 package com.zizohanto.android.tobuy.ui.itemdetail;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -7,15 +9,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.Nullable;
 import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.zizohanto.android.tobuy.util.SnackbarUtils;
 import com.zizohanto.android.tobuyList.R;
 import com.zizohanto.android.tobuyList.databinding.ItemDetailFragBinding;
+
+import java.util.Objects;
 
 /**
  * Main UI for the tobuyItem detail screen.
@@ -68,11 +72,11 @@ public class ItemDetailFragment extends Fragment {
         mViewModel.snackbarText.addOnPropertyChangedCallback(mSnackbarCallback);
     }
 
+    @TargetApi(Build.VERSION_CODES.KITKAT)
     private void setupFab() {
-        FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.fab_edit_item);
+        Button button = Objects.requireNonNull(getActivity()).findViewById(R.id.fab_edit_item);
 
-        fab.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mViewModel.startEditItem();

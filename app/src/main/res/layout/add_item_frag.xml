@@ -38,13 +38,15 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:padding="20dp">
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_name"
+                style="@style/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Name"
+                android:hint="@string/hint_name"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -53,53 +55,54 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:padding="8dp"
                     android:text="@={viewmodel.name}"
-                    tools:text="Name" />
+                    tools:text="@string/hint_name" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_price"
+                style="@style/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Price ₦"
+                android:hint="@string/price"
                 app:layout_constraintLeft_toRightOf="@id/til_name"
                 app:layout_constraintTop_toBottomOf="@id/til_name">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tie_budget"
+                    android:id="@+id/tie_price"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"
-                    android:padding="8dp"
                     android:text="@={Converter.doubleToString(viewmodel.price)}"
-                    tools:text="Price ₦" />
+                    tools:text="@string/price" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_store"
+                style="@style/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Store"
+                android:hint="@string/store_label"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_price">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
                     android:text="@={viewmodel.store}"
-                    tools:text="Store" />
+                    tools:text="@string/store_label" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_placed_in"
+                style="@style/text_input"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Placed In"
+                android:hint="@string/placed_in_label"
+                android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_store">
 
@@ -107,9 +110,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
-                    android:padding="8dp"
                     android:text="@={Converter.integerToString(viewmodel.placedIn)}"
-                    tools:text="Placed In" />
+                    tools:text="@string/placed_in" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
