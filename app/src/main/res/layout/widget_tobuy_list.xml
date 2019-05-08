@@ -32,6 +32,8 @@
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
         android:text="@string/price"
+        android:layout_alignParentStart="true"
+        android:paddingStart="8dp"
         android:textStyle="bold" />
 
     <TextView
@@ -44,6 +46,8 @@
         android:layout_toRightOf="@id/price_label"
         android:background="@color/colorBlueLight"
         android:padding="8dp"
+        android:layout_marginEnd="16dp"
+        android:layout_toEndOf="@id/price_label"
         tools:text="@string/tobuy_list_price_text" />
 
     <TextView
@@ -57,6 +61,8 @@
         android:paddingLeft="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
+        android:layout_toStartOf="@id/budget"
+        android:paddingStart="8dp"
         android:text="@string/budget_label" />
 
     <TextView
@@ -68,6 +74,7 @@
         android:background="@color/colorYellowLight"
         android:layout_alignParentRight="true"
         android:padding="8dp"
+        android:layout_alignParentEnd="true"
         tools:text="2000" />
 
     <TextView
@@ -79,6 +86,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:padding="8dp"
         android:visibility="gone"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
         tools:text="Lidl" />
 
 </RelativeLayout>

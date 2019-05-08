@@ -20,7 +20,7 @@
     <string name="store">Lidl</string>
     <string name="store_label">Store</string>
     <string name="placed_in">Basket</string>
-    <string name="set_reminder">Set Reminder</string>
+    <string name="set_reminder_label">Set Reminder</string>
     <string name="total_cost_label">Total cost:</string>
     <string name="budget_label">Budget:</string>
     <string name="due_date_label">Due Date:</string>
@@ -47,6 +47,6 @@
     <string name="edit">Edit</string>
     <string name="hint_name">Name</string>
     <string name="hint_budget">Budget</string>
-    <string name="due_date">30-11-2099</string>
+    <string name="due_date">30–11–2099</string>
     <string name="save">Save</string>
 </resources>

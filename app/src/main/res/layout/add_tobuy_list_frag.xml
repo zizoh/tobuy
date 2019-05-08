@@ -90,7 +90,7 @@
                 android:visibility="gone"
                 ads:layout_constraintRight_toLeftOf="@id/tv_total_cost"
                 app:layout_constraintTop_toBottomOf="@id/til_budget"
-                tools:text="@string/total_cost_label"/>
+                tools:text="@string/total_cost_label" />
 
             <TextView
                 android:id="@+id/tv_total_cost"
@@ -99,12 +99,13 @@
                 android:layout_marginTop="16dp"
                 android:background="@color/colorBg"
                 android:paddingTop="16dp"
+                android:paddingEnd="16dp"
                 android:paddingRight="16dp"
                 android:paddingBottom="16dp"
                 android:visibility="gone"
                 ads:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/til_budget"
-                tools:text="@string/total_cost_text"/>
+                tools:text="@string/total_cost_text" />
 
             <TextView
                 android:id="@+id/tv_due_date_label"
@@ -132,7 +133,7 @@
                 android:id="@+id/sc_set_reminder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/set_reminder"
+                android:text="@string/set_reminder_label"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/tv_due_date_label"
                 app:layout_constraintLeft_toRightOf="@id/tv_due_date"
@@ -141,9 +142,9 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_store"
                 style="@style/text_input"
-                android:hint="@string/store_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:hint="@string/store_label"
                 android:visibility="gone"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_due_date_label">
@@ -179,14 +180,14 @@
                 ads:layout_constraintBottom_toTopOf="@id/ad_view"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/til_store"/>
+                app:layout_constraintTop_toBottomOf="@id/til_store" />
 
             <com.google.android.gms.ads.AdView
                 android:id="@+id/ad_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                ads:adSize="BANNER"
                 android:layout_marginTop="8dp"
+                ads:adSize="BANNER"
                 ads:adUnitId="@string/banner_test_ad_unit_id"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
