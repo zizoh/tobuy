@@ -61,10 +61,7 @@ public class AddEditItemFragment extends Fragment {
             String tobuyListId = getArguments().getString(ARGUMENT_TOBUYLIST_ID);
             String itemId = getArguments().getString(ARGUMENT_EDIT_ITEM_ID);
             mViewModel.start(itemId, tobuyListId);
-        } /*else {
-            tobuyListId = getArguments().getString(ARGUMENT_TOBUYLIST_ID);
-            mViewModel.start(null, tobuyListId);
-        }*/
+        }
     }
 
     public void setViewModel(@NonNull AddEditItemViewModel viewModel) {

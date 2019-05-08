@@ -14,13 +14,6 @@ public class ModelsConverterUtils {
         return tobuyList;
     }
 
-    public static TobuyListWithItems convertToTobuyListWithItems(TobuyList tobuyList) {
-        TobuyListWithItems tobuyListWithItems = new TobuyListWithItems();
-        tobuyListWithItems.setTobuyList(tobuyList);
-        tobuyListWithItems.setItems(tobuyList.getItems());
-        return tobuyListWithItems;
-    }
-
     public static List<TobuyList> convertToListOfTobuyLists(List<TobuyListWithItems> tobuyListWithItems) {
         List<TobuyList> tobuyLists = new ArrayList<>();
         for (int i = 0; i < tobuyListWithItems.size(); i++) {

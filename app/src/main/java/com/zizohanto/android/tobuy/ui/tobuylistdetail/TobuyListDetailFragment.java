@@ -14,9 +14,11 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.TobuyListViewModel;
@@ -34,7 +36,7 @@ import java.util.Objects;
 /**
  * Main UI for the tobuylist detail screen.
  */
-public class TobuyListDetailFragment extends Fragment {
+public class TobuyListDetailFragment extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
 
     public static final String ARGUMENT_TOBUYLIST_ID = "TOBUYLIST_ID";
     public static final String WIDGET_PREF = "com.zizohanto.android.tobuy.widget.pref";
@@ -76,7 +78,7 @@ public class TobuyListDetailFragment extends Fragment {
 
         setupListAdapter();
 
-//        setupRefreshLayout();
+        setupRefreshLayout();
     }
 
     private void setupSnackbar() {
@@ -99,6 +101,14 @@ public class TobuyListDetailFragment extends Fragment {
                 mViewModel.startEditTobuyList();
             }
         });
+    }
+
+    private void setupRefreshLayout() {
+        mTobuyListDetailFragBinding.refreshLayout.setOnRefreshListener(this);
+        mTobuyListDetailFragBinding.refreshLayout.setColorSchemeColors(
+                ContextCompat.getColor(getActivity(), R.color.colorPrimary),
+                ContextCompat.getColor(getActivity(), R.color.colorAccent),
+                ContextCompat.getColor(getActivity(), R.color.colorPrimaryDark));
     }
 
     @Override
@@ -157,6 +167,11 @@ public class TobuyListDetailFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.tobuylistdetail_fragment_menu, menu);
+    }
+
+    @Override
+    public void onRefresh() {
+        mViewModel.onRefresh();
     }
 
     public static class ItemsAdapter extends BaseAdapter {
