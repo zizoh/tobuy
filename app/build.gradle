@@ -3,6 +3,16 @@ apply plugin: "io.fabric"
 apply plugin: 'com.google.gms.google-services'
 
 android {
+
+    signingConfigs {
+        keyTobuy {
+            keyAlias 'keyTobuy'
+            keyPassword '123456'
+            storeFile file("../signKeyTobuy.jks")
+            storePassword '123456'
+        }
+    }
+
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.zizohanto.android.tobuyList"
@@ -17,6 +27,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.keyTobuy
         }
     }
 
