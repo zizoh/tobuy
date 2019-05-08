@@ -1,7 +1,10 @@
 package com.zizohanto.android.tobuy.ui.tobuylistdetail;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -161,9 +164,11 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
         startActivityForResult(intent, REQUEST_EDIT_TOBUYLIST);
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void openItemDetails(String itemId) {
         Intent intent = ItemDetailActivity.getIntent(this, itemId, mTobuyListId);
-        startActivityForResult(intent, AddEditItemActivity.REQUEST_CODE);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
+        startActivityForResult(intent, AddEditItemActivity.REQUEST_CODE, options.toBundle());
     }
 }

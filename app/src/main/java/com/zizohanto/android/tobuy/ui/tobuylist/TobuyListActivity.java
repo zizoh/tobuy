@@ -1,6 +1,9 @@
 package com.zizohanto.android.tobuy.ui.tobuylist;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
 
@@ -147,10 +150,12 @@ public class TobuyListActivity extends AppCompatActivity implements TobuyListIte
 
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void openTobuyListDetails(String tobuyListId) {
         Intent intent = TobuyListDetailActivity.getIntentForActivity(this, tobuyListId, false);
-        startActivityForResult(intent, AddEditTobuyListActivity.REQUEST_CODE);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
+        startActivityForResult(intent, AddEditTobuyListActivity.REQUEST_CODE, options.toBundle());
     }
 
     @Override

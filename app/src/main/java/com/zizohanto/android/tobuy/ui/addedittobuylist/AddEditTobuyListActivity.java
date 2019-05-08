@@ -1,6 +1,9 @@
 package com.zizohanto.android.tobuy.ui.addedittobuylist;
 
+import android.annotation.TargetApi;
+import android.app.ActivityOptions;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -120,10 +123,11 @@ public class AddEditTobuyListActivity extends AppCompatActivity implements AddEd
             return viewModel;
         }
     }
-
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void openItemDetails(String itemId) {
         Intent intent = ItemDetailActivity.getIntent(this, itemId, mTobuyListId);
-        startActivityForResult(intent, AddEditItemActivity.REQUEST_CODE);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(this);
+        startActivityForResult(intent, AddEditItemActivity.REQUEST_CODE, options.toBundle());
     }
 }
