@@ -104,6 +104,7 @@ public class AddEditTobuyListViewModel extends BaseObservable implements TobuyLi
 
     // Called when clicking on fab.
     public void saveTobuyList() {
+        boolean isNewTobuyList = isNewTobuyList();
         if (isNewTobuyList()) {
             createTobuyList(name.get(), store.get(), budget.get(), balance.get(),
                     totalCost.get(), items.get(), dueDate.get());

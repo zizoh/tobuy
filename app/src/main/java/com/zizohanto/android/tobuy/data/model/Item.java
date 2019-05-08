@@ -13,15 +13,11 @@ import com.google.common.base.Strings;
 
 import java.util.UUID;
 
-import static androidx.room.ForeignKey.CASCADE;
-
 @Entity(tableName = "item",
         foreignKeys = @ForeignKey(
                 entity = TobuyList.class,
                 parentColumns = "id",
-                childColumns = "tobuy_list_id",
-                onDelete = CASCADE,
-                onUpdate = CASCADE
+                childColumns = "tobuy_list_id"
         ),
         indices = {
                 @Index(value = {"tobuy_list_id"})

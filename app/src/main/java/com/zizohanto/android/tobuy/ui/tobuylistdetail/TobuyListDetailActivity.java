@@ -15,6 +15,7 @@ import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemActivity;
 import com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListActivity;
 import com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListFragment;
 import com.zizohanto.android.tobuy.ui.itemdetail.ItemDetailActivity;
+import com.zizohanto.android.tobuy.ui.tobuylist.TobuyListActivity;
 import com.zizohanto.android.tobuy.util.ActivityUtils;
 import com.zizohanto.android.tobuyList.R;
 
@@ -25,6 +26,8 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
 
     public static final String EXTRA_TOBUYLIST_ID = "TOBUYLIST_ID";
 
+    public static final String EXTRA_FROM_WIDGET = "FROM_WIDGET";
+
     public static final String TOBUYLISTDETAIL_VIEWMODEL_TAG = "TOBUYLISTDETAIL_VIEWMODEL_TAG";
 
     public static final int DELETE_RESULT_OK = RESULT_FIRST_USER + 2;
@@ -33,10 +36,12 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
 
     private TobuyListDetailViewModel mTobuyListViewModel;
     private String mTobuyListId;
+    private boolean mFromWidget;
 
-    public static Intent getIntentForActivity(Context context, String tobuyListId) {
+    public static Intent getIntentForActivity(Context context, String tobuyListId, boolean fromWidget) {
         Intent intent = new Intent(context, TobuyListDetailActivity.class);
         intent.putExtra(EXTRA_TOBUYLIST_ID, tobuyListId);
+        intent.putExtra(EXTRA_FROM_WIDGET, fromWidget);
         return intent;
     }
 
@@ -80,7 +85,9 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
 
         setupToolbar();
 
-        mTobuyListId = getIntent().getStringExtra(EXTRA_TOBUYLIST_ID);
+        Intent intent = getIntent();
+        mTobuyListId = intent.getStringExtra(EXTRA_TOBUYLIST_ID);
+        mFromWidget = intent.getBooleanExtra(EXTRA_FROM_WIDGET, false);
 
         TobuyListDetailFragment tobuyListDetailFragment = findOrCreateViewFragment();
 
@@ -131,6 +138,11 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
 
     @Override
     public boolean onSupportNavigateUp() {
+        if (mFromWidget) {
+            Intent intent = new Intent(this, TobuyListActivity.class);
+            startActivity(intent);
+            return true;
+        }
         onBackPressed();
         return true;
     }

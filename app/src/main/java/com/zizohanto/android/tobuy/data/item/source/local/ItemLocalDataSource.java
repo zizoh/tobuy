@@ -1,6 +1,8 @@
 package com.zizohanto.android.tobuy.data.item.source.local;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.zizohanto.android.tobuy.data.item.ItemDataSource;
 import com.zizohanto.android.tobuy.data.model.Item;
@@ -43,26 +45,19 @@ public class ItemLocalDataSource implements ItemDataSource {
      */
     @Override
     public void getItems(final String tobuyListId, @NonNull final LoadItemsCallback callback) {
-        Runnable runnable = new Runnable() {
+
+        LiveData<List<Item>> items = mItemDao.getItemsOfList(tobuyListId);
+        items.observeForever(new Observer<List<Item>>() {
             @Override
-            public void run() {
-                final List<Item> items = mItemDao.getItemsOfList(tobuyListId);
-                mAppExecutors.mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (items.isEmpty()) {
-                            // This will be called if the table is new or just empty.
-                            callback.onDataNotAvailable();
-                        } else {
-                            callback.onItemsLoaded(items);
-                        }
-                    }
-                });
+            public void onChanged(List<Item> items) {
+                if (items.isEmpty()) {
+                    // This will be called if the table is new or just empty.
+                    callback.onDataNotAvailable();
+                } else {
+                    callback.onItemsLoaded(items);
+                }
             }
-        };
-
-        mAppExecutors.diskIO().execute(runnable);
-
+        });
     }
 
     /**
@@ -71,25 +66,18 @@ public class ItemLocalDataSource implements ItemDataSource {
      */
     @Override
     public void getItem(@NonNull final String tobuyId, @NonNull final GetItemCallback callback) {
-        Runnable runnable = new Runnable() {
+
+        LiveData<Item> item = mItemDao.getItemWithId(tobuyId);
+        item.observeForever(new Observer<Item>() {
             @Override
-            public void run() {
-                final Item item = mItemDao.getItemWithId(tobuyId);
-
-                mAppExecutors.mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (item != null) {
-                            callback.onItemLoaded(item);
-                        } else {
-                            callback.onDataNotAvailable();
-                        }
-                    }
-                });
+            public void onChanged(Item item) {
+                if (item != null) {
+                    callback.onItemLoaded(item);
+                } else {
+                    callback.onDataNotAvailable();
+                }
             }
-        };
-
-        mAppExecutors.diskIO().execute(runnable);
+        });
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.zizohanto.android.tobuy.data.tobuylist.source.local;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -22,7 +23,7 @@ public interface TobuyListDao {
      */
     @Query("SELECT * FROM tobuylist")
     @Transaction
-    List<TobuyListWithItems> getTobuyLists();
+    LiveData<List<TobuyListWithItems>> getTobuyLists();
 
     /**
      * Select a tobuyList by id.
@@ -31,7 +32,8 @@ public interface TobuyListDao {
      * @return the tobuy with tobuyListId.
      */
     @Query("SELECT * FROM tobuylist WHERE id = :tobuyListId")
-    TobuyListWithItems getTobuyListWithId(String tobuyListId);
+    @Transaction
+    LiveData<TobuyListWithItems> getTobuyListWithId(String tobuyListId);
 
     /**
      * Insert a tobuyList in the database. If the tobuyList already exists, replace it.

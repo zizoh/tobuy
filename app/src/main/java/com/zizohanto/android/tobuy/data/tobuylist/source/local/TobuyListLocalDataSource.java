@@ -1,6 +1,8 @@
 package com.zizohanto.android.tobuy.data.tobuylist.source.local;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
 
 import com.zizohanto.android.tobuy.data.model.TobuyList;
 import com.zizohanto.android.tobuy.data.model.TobuyListWithItems;
@@ -45,13 +47,12 @@ public class TobuyListLocalDataSource implements TobuyListDataSource {
      */
     @Override
     public void getTobuyLists(@NonNull final LoadTobuyListsCallback callback) {
-        Runnable runnable = new Runnable() {
+        LiveData<List<TobuyListWithItems>> tobuyListWithItems = mTobuyListDao.getTobuyLists();
+
+        tobuyListWithItems.observeForever(new Observer<List<TobuyListWithItems>>() {
             @Override
-            public void run() {
-
-                List<TobuyListWithItems> tobuyListWithItems = mTobuyListDao.getTobuyLists();
-
-                final List<TobuyList> tobuyLists = ModelsConverterUtils.convertToListOfTobuyLists(tobuyListWithItems);
+            public void onChanged(List<TobuyListWithItems> items) {
+                final List<TobuyList> tobuyLists = ModelsConverterUtils.convertToListOfTobuyLists(items);
 
                 mAppExecutors.mainThread().execute(new Runnable() {
                     @Override
@@ -65,9 +66,7 @@ public class TobuyListLocalDataSource implements TobuyListDataSource {
                     }
                 });
             }
-        };
-
-        mAppExecutors.diskIO().execute(runnable);
+        });
 
     }
 
@@ -77,26 +76,21 @@ public class TobuyListLocalDataSource implements TobuyListDataSource {
      */
     @Override
     public void getTobuyList(@NonNull final String tobuyId, @NonNull final GetTobuyListCallback callback) {
-        Runnable runnable = new Runnable() {
+
+        LiveData<TobuyListWithItems> tobuyListWithItems = mTobuyListDao.getTobuyListWithId(tobuyId);
+
+        tobuyListWithItems.observeForever(new Observer<TobuyListWithItems>() {
             @Override
-            public void run() {
-                TobuyListWithItems tobuyListWithItems = mTobuyListDao.getTobuyListWithId(tobuyId);
-
+            public void onChanged(TobuyListWithItems tobuyListWithItems) {
                 final TobuyList tobuyList = ModelsConverterUtils.convertToTobuyList(tobuyListWithItems);
-                mAppExecutors.mainThread().execute(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (tobuyList != null) {
-                            callback.onTobuyListLoaded(tobuyList);
-                        } else {
-                            callback.onDataNotAvailable();
-                        }
-                    }
-                });
-            }
-        };
 
-        mAppExecutors.diskIO().execute(runnable);
+                if (tobuyList != null) {
+                    callback.onTobuyListLoaded(tobuyList);
+                } else {
+                    callback.onDataNotAvailable();
+                }
+            }
+        });
     }
 
     @Override
@@ -105,7 +99,6 @@ public class TobuyListLocalDataSource implements TobuyListDataSource {
         Runnable saveRunnable = new Runnable() {
             @Override
             public void run() {
-//                TobuyList tobuyList = ModelsConverterUtils.convertToTobuyList(tobuyList);
                 mTobuyListDao.insertTobuyList(tobuyList);
             }
         };

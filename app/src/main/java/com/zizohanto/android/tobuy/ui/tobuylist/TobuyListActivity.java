@@ -149,7 +149,7 @@ public class TobuyListActivity extends AppCompatActivity implements TobuyListIte
 
     @Override
     public void openTobuyListDetails(String tobuyListId) {
-        Intent intent = TobuyListDetailActivity.getIntentForActivity(this, tobuyListId);
+        Intent intent = TobuyListDetailActivity.getIntentForActivity(this, tobuyListId, false);
         startActivityForResult(intent, AddEditTobuyListActivity.REQUEST_CODE);
     }
 

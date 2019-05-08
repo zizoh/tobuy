@@ -1,5 +1,6 @@
 package com.zizohanto.android.tobuy.data.item.source.local;
 
+import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
@@ -19,7 +20,7 @@ public interface ItemDao {
      * @return all items.
      */
     @Query("SELECT * FROM item WHERE tobuy_list_id = :tobuyListId")
-    List<Item> getItemsOfList(String tobuyListId);
+    LiveData<List<Item>> getItemsOfList(String tobuyListId);
 
     /**
      * Select a item by id.
@@ -28,7 +29,7 @@ public interface ItemDao {
      * @return the item with itemId.
      */
     @Query("SELECT * FROM item WHERE id = :itemId")
-    Item getItemWithId(String itemId);
+    LiveData<Item> getItemWithId(String itemId);
 
     /**
      * Insert a item in the database. If the item already exists, replace it.

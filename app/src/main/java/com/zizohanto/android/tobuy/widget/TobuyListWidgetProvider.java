@@ -45,7 +45,7 @@ public class TobuyListWidgetProvider extends AppWidgetProvider {
         views.setTextViewText(R.id.budget, budget);
         views.setTextViewText(R.id.store, store);
 
-        Intent clickIntent = getIntentForActivity(context, tobuyListId);
+        Intent clickIntent = getIntentForActivity(context, tobuyListId, true);
         clickIntent.putExtra(EXTRA_TOBUYLIST_ID, tobuyListId);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, clickIntent, 0);
         views.setOnClickPendingIntent(R.id.appwidget_root, pendingIntent);

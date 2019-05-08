@@ -28,7 +28,9 @@
         android:layout_alignParentLeft="true"
         android:layout_marginTop="8dp"
         android:background="@color/colorBlueLight"
-        android:padding="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:text="@string/price"
         android:textStyle="bold" />
 
@@ -38,7 +40,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/name"
-        android:layout_marginRight="24dp"
+        android:layout_marginRight="16dp"
+        android:layout_toRightOf="@id/price_label"
         android:background="@color/colorBlueLight"
         android:padding="8dp"
         tools:text="@string/tobuy_list_price_text" />
@@ -51,7 +54,9 @@
         android:layout_toLeftOf="@id/budget"
         android:layout_marginTop="8dp"
         android:background="@color/colorYellowLight"
-        android:padding="8dp"
+        android:paddingLeft="8dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
         android:text="@string/budget_label" />
 
     <TextView
