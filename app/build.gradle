@@ -1,6 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: "io.fabric"
-apply plugin: 'com.google.gms.google-services'
 
 android {
 
@@ -70,8 +68,6 @@ dependencies {
     implementation "com.facebook.stetho:stetho:$stethoVersion"
     implementation "com.google.guava:guava:$guavaVersion"
     implementation "com.google.code.gson:gson:$gsonVersion"
-    implementation "com.crashlytics.sdk.android:crashlytics:$crashlyticsVersion"
-    implementation "com.google.firebase:firebase-core:$firebaseVersion"
 
     // local unit tests dependencies
     testImplementation "junit:junit:$jUnitVersion"

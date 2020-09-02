@@ -14,7 +14,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.crashlytics.android.Crashlytics;
 import com.google.android.material.navigation.NavigationView;
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.ViewModelHolder;
@@ -23,9 +22,7 @@ import com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailActivity;
 import com.zizohanto.android.tobuy.util.ActivityUtils;
 import com.zizohanto.android.tobuyList.R;
 
-import io.fabric.sdk.android.Fabric;
-
-public class TobuyListActivity extends AppCompatActivity implements TobuyListItemNavigator, TobuyListsNavigator{
+public class TobuyListActivity extends AppCompatActivity implements TobuyListItemNavigator, TobuyListsNavigator {
 
     private DrawerLayout mDrawerLayout;
 
@@ -37,8 +34,6 @@ public class TobuyListActivity extends AppCompatActivity implements TobuyListIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tobuylists_act);
-
-        Fabric.with(this, new Crashlytics());
 
         setupToolbar();
 
