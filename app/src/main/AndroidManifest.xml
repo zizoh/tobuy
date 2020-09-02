@@ -40,10 +40,6 @@
                 android:resource="@xml/tobuy_list_widget_info" />
         </receiver>
 
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/ad_id" />
-
     </application>
 
 </manifest>

@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.ads.InterstitialAd;
 import com.zizohanto.android.tobuy.util.SnackbarUtils;
 import com.zizohanto.android.tobuyList.R;
 import com.zizohanto.android.tobuyList.databinding.AddItemFragBinding;
@@ -37,7 +36,6 @@ public class AddEditItemFragment extends Fragment {
 
     private Observable.OnPropertyChangedCallback mSnackbarCallback;
     private Context mContext;
-    private InterstitialAd mInterstitialAd;
 
     public AddEditItemFragment() {
         // Required empty public constructor

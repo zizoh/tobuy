@@ -21,8 +21,6 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.Observable;
 import androidx.fragment.app.Fragment;
 
-import com.google.android.gms.ads.AdListener;
-import com.google.android.gms.ads.AdRequest;
 import com.zizohanto.android.tobuy.Injection;
 import com.zizohanto.android.tobuy.data.model.Item;
 import com.zizohanto.android.tobuy.data.tobuylist.TobuyListsRepository;
@@ -84,23 +82,6 @@ public class AddEditTobuyListFragment extends Fragment {
             mViewDataBinding = AddTobuyListFragBinding.bind(root);
         }
 
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mViewDataBinding.adView.loadAd(adRequest);
-        mViewDataBinding.adView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-            }
-
-            @Override
-            public void onAdClosed() {
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                super.onAdFailedToLoad(errorCode);
-            }
-        });
-
         mViewDataBinding.setViewmodel(mViewModel);
 
         setHasOptionsMenu(true);
@@ -117,10 +98,6 @@ public class AddEditTobuyListFragment extends Fragment {
         } else {
             mViewModel.start(null);
         }
-
-        if (mViewDataBinding.adView != null) {
-            mViewDataBinding.adView.resume();
-        }
     }
 
     @Override
@@ -129,18 +106,7 @@ public class AddEditTobuyListFragment extends Fragment {
             mViewModel.snackbarText.removeOnPropertyChangedCallback(mSnackbarCallback);
         }
 
-        if (mViewDataBinding.adView != null) {
-            mViewDataBinding.adView.destroy();
-        }
         super.onDestroy();
-    }
-
-    @Override
-    public void onPause() {
-        if (mViewDataBinding.adView != null) {
-            mViewDataBinding.adView.pause();
-        }
-        super.onPause();
     }
 
     private void setupSnackbar() {
