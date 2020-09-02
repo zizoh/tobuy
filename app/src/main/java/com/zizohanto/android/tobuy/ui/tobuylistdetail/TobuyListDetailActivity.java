@@ -129,6 +129,7 @@ public class TobuyListDetailActivity extends AppCompatActivity implements TobuyL
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_EDIT_TOBUYLIST) {
             // If the tobuyList was edited successfully, go back to the list.
             if (resultCode == ADD_EDIT_RESULT_OK) {

@@ -16,7 +16,6 @@ import com.zizohanto.android.tobuy.ui.addedititem.AddEditItemFragment;
 import com.zizohanto.android.tobuy.util.ActivityUtils;
 import com.zizohanto.android.tobuyList.R;
 
-import static com.zizohanto.android.tobuy.ui.addedittobuylist.AddEditTobuyListActivity.ADD_EDIT_RESULT_OK;
 import static com.zizohanto.android.tobuy.ui.itemdetail.ItemDetailFragment.REQUEST_EDIT_ITEM;
 import static com.zizohanto.android.tobuy.ui.tobuylistdetail.TobuyListDetailActivity.EXTRA_TOBUYLIST_ID;
 
@@ -111,18 +110,6 @@ public class ItemDetailActivity extends AppCompatActivity implements ItemDetailN
         ActionBar ab = getSupportActionBar();
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == REQUEST_EDIT_ITEM) {
-            // If the tobuyItem was edited successfully, go back to the item.
-            if (resultCode == ADD_EDIT_RESULT_OK) {
-
-                // If the result comes from the add/edit screen, it's an edit.
-
-            }
-        }
     }
 
     @Override

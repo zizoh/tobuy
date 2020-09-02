@@ -140,11 +140,6 @@ public class TobuyListActivity extends AppCompatActivity implements TobuyListIte
                 });
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-
-    }
-
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void openTobuyListDetails(String tobuyListId) {
