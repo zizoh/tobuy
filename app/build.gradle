@@ -13,11 +13,11 @@ android {
         }
     }
 
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.zizohanto.android.tobuyList"
-        minSdkVersion 15
-        targetSdkVersion 28
+        minSdkVersion 19
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
@@ -37,33 +37,30 @@ android {
 }
 
 ext {
-    supportLibVersion = '1.0.2'
-    constraintLayoutVersion = '1.1.3'
-    materialDesignVersion = '1.0.0'
-    jUnitVersion = '4.12'
-    runnerVersion = '1.1.1'
-    espressoVersion = '3.1.1'
+    constraintLayoutVersion = '2.0.1'
+    materialDesignVersion = '1.3.0-alpha02'
+    jUnitVersion = '4.13'
+    runnerVersion = '1.3.0'
+    espressoVersion = '3.3.0'
     timberVersion = '4.7.0'
     stethoVersion = '1.5.1'
-    roomVersion = '2.0.0'
-    guavaVersion = '27.1-android'
-    gsonVersion = "2.8.5"
-    adsVersion = "17.2.0"
-    crashlyticsVersion = "2.9.9"
-    firebaseVersion = "16.0.8"
+    roomVersion = '2.3.0-alpha02'
+    guavaVersion = '29.0-android'
+    gsonVersion = "2.8.6"
+    adsVersion = "19.3.0"
+    crashlyticsVersion = "2.10.1"
+    firebaseVersion = "17.5.0"
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     // app's dependencies
-    implementation "androidx.appcompat:appcompat:$supportLibVersion"
+    implementation "androidx.appcompat:appcompat:1.3.0-alpha02"
     implementation "androidx.constraintlayout:constraintlayout:$constraintLayoutVersion"
     implementation "com.google.android.material:material:$materialDesignVersion"
 
     implementation "androidx.room:room-runtime:$roomVersion"
-    implementation 'androidx.appcompat:appcompat:1.0.2'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     annotationProcessor "androidx.room:room-compiler:$roomVersion"
 
     implementation "com.jakewharton.timber:timber:$timberVersion"
