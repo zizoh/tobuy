@@ -43,13 +43,15 @@ dependencies {
     implementAll(AndroidX.components)
     implementAll(View.components)
     implementAll(Others.components)
-    implementAll(Cache.components)
+    api(Cache.roomRuntime)
 
     testImplementation(Test.junit)
 
     androidTestImplementation(Test.runner)
 
     androidTestImplementation(Test.espresso)
+
+    kapt(Cache.AnnotationProcessor.room)
 }
 configurations {
     implementation.get().exclude(mapOf("group" to "org.jetbrains", "module" to "annotations"))

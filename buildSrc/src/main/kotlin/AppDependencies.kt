@@ -54,7 +54,7 @@ object Dependencies {
     object Others : Libraries {
         object Version {
             const val guava: String = "29.0-android"
-            const val gson: String = "gson"
+            const val gson: String = "2.8.6"
         }
 
         private const val guava: String = "com.google.guava:guava:${Version.guava}"
@@ -63,15 +63,16 @@ object Dependencies {
         override val components: List<String> = listOf(guava, gson)
     }
 
-    object Cache : Libraries {
+    object Cache {
         object Version {
             const val room: String = "2.3.0-alpha02"
         }
 
-        private const val room: String = "androidx.room:room-compiler:${Version.room}"
-        private const val roomRuntime: String = "androidx.room:room-runtime:${Version.room}"
+        object AnnotationProcessor {
+            const val room: String = "androidx.room:room-compiler:${Version.room}"
+        }
 
-        override val components: List<String> = listOf(room, roomRuntime)
+        const val roomRuntime: String = "androidx.room:room-runtime:${Version.room}"
     }
 
     object Test {
